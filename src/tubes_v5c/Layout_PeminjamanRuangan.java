@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tubes_v4;
+package tubes_v5c;
 
 import java.security.SecureRandom;
 import java.sql.Connection;
@@ -36,7 +36,6 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     private String nama;
     private String username;
     private String id;
-    private int idBarangpinjam;
     
  
 
