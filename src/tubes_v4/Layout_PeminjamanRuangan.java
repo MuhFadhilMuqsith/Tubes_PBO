@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
  * @author _MFMq_PC
  */
 public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
-    private DefaultTableModel modelList = new DefaultTableModel();
+    
     private DefaultTableModel modelPinjam = new DefaultTableModel();
     private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
     private Connection conn;
@@ -38,12 +38,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     private String id;
     private int idBarangpinjam;
     
-     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
-    private static final String NUMBER = "0123456789";
-
-    private static final String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
-    private static SecureRandom random = new SecureRandom();
+ 
 
     /**
      * Creates new form Layout_PeminjamanRuangan
@@ -51,9 +46,11 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     public Layout_PeminjamanRuangan(User user) {
         initComponents();
         loadKolomList();
-        tblRuanganPinjam.setModel(modelList);
+        tblRuanganPinjam.setModel(modelPinjam);
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
+        loadObjek();
+        tampilRuangan();
         Date now = Date.from(Instant.now());
         Date minDate = addDays(now);
         dtAwal.setMinSelectableDate(minDate);
@@ -79,7 +76,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     private void loadObjek(){
         if (conn != null){
             listObjek = new ArrayList<>();
-            String query = "SELECT id_objek,nama_objek,jumlah_tersedia,total_jumlah FROM objek_pinjam;";
+            String query = "SELECT id_objek,nama_objek,jumlah_tersedia,total_jumlah FROM objek_pinjam WHERE jenis_objek='ruangan';";
             try {
                 PreparedStatement ps = conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
@@ -99,31 +96,58 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
             }
         }
     }
-    
-    private static String generateRandomString() {
-        if (5 < 1) throw new IllegalArgumentException();
-
-        StringBuilder sb = new StringBuilder(5);
-        for (int i = 0; i < 5; i++) {
-
-			// 0-62 (exclusive), random returns 0-61
-            int rndCharAt = random.nextInt(DATA_FOR_RANDOM_STRING.length());
-            char rndChar = DATA_FOR_RANDOM_STRING.charAt(rndCharAt);
-
-            // debug
-            System.out.format("%d\t:\t%c%n", rndCharAt, rndChar);
-
-            sb.append(rndChar);
-
+    private void tampilRuangan(){
+        modelPinjam.setRowCount(0);
+        String status = "Tersedia";
+        for (ObjekPinjam ruangan : listObjek){
+            
+                    if (ruangan.getJumlahTersedia() < 0){
+                        status = "Sedang Dalam Peminjaman";
+                    }
+             modelPinjam.addRow(new Object [] {ruangan.getId(),ruangan.getNamaObjek(),status});
         }
-
-        return sb.toString();
-
+            
     }
-
     
-    
+    private void insertPeminjaman(){
+        if (conn != null){
+            try{
+                int hasil = 0;
+                    String query = "INSERT INTO data_peminjaman "
+                        + "(kode_peminjaman,jenis_peminjaman,nama_peminjam,nama_organisasi,nama_kegiatan,id_objek,jumlah_barang,tanggal_peminjaman,tanggal_pengembalian,status,catatan,id_user) VALUES"
+                        + "(?,?,?,?,?,?,?,?,?,?,?,?)";
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    ps.setString(1,listPeminjaman.get(0).getKodePeminjaman());
+                    ps.setString(2,listPeminjaman.get(0).getJenisPeminjaman());
+                    ps.setString(3,listPeminjaman.get(0).getNamaPeminjam());
+                    ps.setString(4,listPeminjaman.get(0).getNamaOrganisasi());
+                    ps.setString(5,listPeminjaman.get(0).getNamaKegiatan());
+                    ps.setInt(6,listPeminjaman.get(0).getIdObjek());
+                    ps.setInt(7,listPeminjaman.get(0).getJumlahBarang());
+                    ps.setString(8,listPeminjaman.get(0).getTanggalPeminjaman());
+                    ps.setString(9,listPeminjaman.get(0).getTanggalPengembalian());
+                    ps.setString(10,listPeminjaman.get(0).getStatus());
+                    ps.setString(11,listPeminjaman.get(0).getCatatan());
+                    ps.setInt(12,listPeminjaman.get(0).getIdUser());
+                    hasil = ps.executeUpdate();
 
+                if (hasil > 0){
+                    User user = new User();
+                    user.setUsername(username);
+                    user.setId(id);
+                    user.setNama(nama);
+                    JOptionPane.showMessageDialog(this,"Peminjaman Sedang Diproses !");
+                    this.dispose();
+                    new Layout_DashboardUser(user).setVisible(true);
+                }
+            }
+            catch(SQLException ex){
+                 Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, ex);
+                 
+                 JOptionPane.showMessageDialog(this,"User Telah Terdaftar");
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -147,15 +171,13 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblRuanganPinjam = new javax.swing.JTable();
-        btnHapus = new javax.swing.JButton();
-        btnEdit = new javax.swing.JButton();
         btnProses = new javax.swing.JButton();
         dtAwal = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setText("Form Peminjaman Ruanagn");
+        jLabel1.setText("Form Peminjaman Ruangan");
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Data Peminjaman"));
 
@@ -185,30 +207,17 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(tblRuanganPinjam);
 
-        btnHapus.setText("Hapus");
-
-        btnEdit.setText("Edit");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(186, Short.MAX_VALUE)
-                .addComponent(btnHapus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnHapus)
-                    .addComponent(btnEdit)))
+                .addGap(29, 29, 29))
         );
 
         btnProses.setText("Proses Peminjaman");
@@ -311,7 +320,8 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
 
     private void btnProsesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProsesActionPerformed
         // TODO add your handling code here:
-        if (modelPinjam.getRowCount() > 0){
+        int barisAktif = tblRuanganPinjam.getSelectedRow();
+        if (barisAktif >= 0){
             try {
                 String namaPeminjam = tfNamaPeminjam.getText();
                 String namaOrganisasi = tfNamaOrganisasi.getText();
@@ -320,18 +330,15 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                 Date tanggalAkhir = dtAkhir.getDate();
                 String tAwal = dtf.format(tanggalAwal);
                 String tAkhir = dtf.format(tanggalAkhir);
-                String kodePinjam = generateRandomString();
+                String kodePinjam = new Peminjaman().generateRandomString();
 
                 if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
-                    for (int i=0;i<modelPinjam.getRowCount();i++){
-                        int idBarang = (Integer) modelPinjam.getValueAt(i,0);
-                        int jumlahBarang = (Integer) modelPinjam.getValueAt(i,2);
+                        int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
+                        int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
                         int idAkun = Integer.parseInt(id);
-                        DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"barang",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
+                        DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
                         listPeminjaman.add(dpb);
-                    }
-
-                    
+                        insertPeminjaman();
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir");
@@ -383,8 +390,6 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEdit;
-    private javax.swing.JButton btnHapus;
     private javax.swing.JButton btnProses;
     private com.toedter.calendar.JDateChooser dtAkhir;
     private com.toedter.calendar.JDateChooser dtAwal;

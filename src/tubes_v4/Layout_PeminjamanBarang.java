@@ -31,19 +31,14 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
     private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
     private Connection conn;
     private ArrayList<ObjekPinjam> listObjek;
-    private ArrayList<DataPeminjamanBarang> listPeminjaman = new ArrayList<>();
+    private ArrayList<Peminjaman> listPeminjaman = new ArrayList<>();
      
     private String nama;
     private String username;
     private String id;
     private int idBarangpinjam;
     
-     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
-    private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
-    private static final String NUMBER = "0123456789";
 
-    private static final String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
-    private static SecureRandom random = new SecureRandom();
 
     /**
      * Creates new form Layout_PeminjamanBarang
@@ -87,7 +82,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
     private void loadObjek(){
         if (conn != null){
             listObjek = new ArrayList<>();
-            String query = "SELECT id_objek,nama_objek,jumlah_tersedia,total_jumlah FROM objek_pinjam;";
+            String query = "SELECT id_objek,nama_objek,jumlah_tersedia,total_jumlah FROM objek_pinjam WHERE jenis_objek = 'barang';";
             try {
                 PreparedStatement ps = conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
@@ -155,31 +150,6 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(this,"User Telah Terdaftar");
             }
         }
-    }
-    
-    private void peminjamanData(DataPeminjamanBarang dpb){
-        
-    }
-    
-    private static String generateRandomString() {
-        if (5 < 1) throw new IllegalArgumentException();
-
-        StringBuilder sb = new StringBuilder(5);
-        for (int i = 0; i < 5; i++) {
-
-			// 0-62 (exclusive), random returns 0-61
-            int rndCharAt = random.nextInt(DATA_FOR_RANDOM_STRING.length());
-            char rndChar = DATA_FOR_RANDOM_STRING.charAt(rndCharAt);
-
-            // debug
-            System.out.format("%d\t:\t%c%n", rndCharAt, rndChar);
-
-            sb.append(rndChar);
-
-        }
-
-        return sb.toString();
-
     }
     
     private void resetBarang(){
@@ -296,8 +266,18 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tblBarangPinjam);
 
         btnHapus.setText("Hapus");
+        btnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHapusActionPerformed(evt);
+            }
+        });
 
         btnEdit.setText("Edit");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -436,11 +416,11 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(tfJumlahPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTambah)
+                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -514,8 +494,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         // TODO add your handling code here:
         boolean cek = false;
-           
-        
+              
         if (!(tfNamaBarang.getText().equals("") || tfJumlahPeminjaman.getText().equals("0"))){
             try {
                 String namaBarang = tfNamaBarang.getText();
@@ -533,8 +512,13 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                     }
                 }
                 if (cek == true){
+                    if(btnTambah.getText().equals("Tambah")){
                     modelPinjam.addRow(new Object[] {idBarangpinjam,namaBarang,jumlahBarang});
-                    
+                    }
+                    else {
+                        modelPinjam.setValueAt(jumlahBarang, tblBarangPinjam.getSelectedRow(), 2);
+                        btnTambah.setText("Tambah");
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Nama Barang dan Jumlah Pinjaman");
@@ -566,7 +550,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
             Date tanggalAkhir = dtAkhir.getDate();
             String tAwal = dtf.format(tanggalAwal);
             String tAkhir = dtf.format(tanggalAkhir);
-            String kodePinjam = generateRandomString();
+            String kodePinjam = new Peminjaman().generateRandomString();
              
   
                 if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
@@ -574,7 +558,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                     int idBarang = (Integer) modelPinjam.getValueAt(i,0);
                     int jumlahBarang = (Integer) modelPinjam.getValueAt(i,2);
                     int idAkun = Integer.parseInt(id);
-                    DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"barang",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
+                    Peminjaman dpb = new Peminjaman(kodePinjam,"barang",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
                     listPeminjaman.add(dpb);
                     }
             
@@ -593,6 +577,41 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                  JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !");
             }   
     }//GEN-LAST:event_btnProsesActionPerformed
+
+    private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
+        // TODO add your handling code here:
+        if (modelPinjam.getRowCount() > 0){
+            try {
+                int barisAktif = tblBarangPinjam.getSelectedRow();
+                modelPinjam.removeRow(barisAktif);
+                
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !"); 
+        }
+    }//GEN-LAST:event_btnHapusActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        // TODO add your handling code here:
+        if (modelPinjam.getRowCount() > 0){
+            try {
+                int barisAktif = tblBarangPinjam.getSelectedRow();
+                tfNamaBarang.setText(modelPinjam.getValueAt(barisAktif,1)+"");
+                tfJumlahPeminjaman.setText(modelPinjam.getValueAt(barisAktif,2)+"");
+                btnTambah.setText("Edit");
+            } 
+            catch (Exception e){
+                JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !");
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !"); 
+        }
+    }//GEN-LAST:event_btnEditActionPerformed
 
     /**
      * @param args the command line arguments
