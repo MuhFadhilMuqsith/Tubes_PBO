@@ -41,6 +41,19 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
             tfNamaKegiatan.setText(sendData.get(i).getNamaKegiatan());
             tfTanggalPeminjaman.setText(sendData.get(i).getTanggalPeminjaman());
             tfTanggalPengembalian.setText(sendData.get(i).getTanggalPengembalian());
+            taCatatan.setText(sendData.get(i).getCatatan());
+            if (sendData.get(i).getStatus().equals("proses")){
+                btnTerima.setText("Terima Permintaan");
+                btnTolak.setText("Tolak Permintaan");
+            }
+            else if (sendData.get(i).getStatus().equals("peminjaman diterima")) {
+                btnTerima.setText("Terima Pengembalian");
+                btnTolak.setText("Tolak Pengembalian");
+            }
+            else {
+                btnTerima.setVisible(false);
+                btnTolak.setVisible(false);
+            }
         }
         loadDetail(tfKodePeminjaman.getText());
     }
@@ -91,15 +104,32 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                         PreparedStatement pe = conn.prepareStatement(update);
                         hasilUp = pe.executeUpdate();
                     }
-                    if (!(hasilUp > 0 && hasil > 0)){
-                           JOptionPane.showMessageDialog(this,"Gagal !");   
-                    }                     
+                    if (hasilUp > 0 && hasil > 0){
+                           JOptionPane.showMessageDialog(this,"Peminjaman Telah Dikonfirmasi !");
+                            this.dispose();
+                            new Layout_DashboardAdmin().setVisible(true);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this,"Gagal !");
+                    }                    
                 }
-                if (hasil > 0){
-                    JOptionPane.showMessageDialog(this,"Permintaan Peminjaman Telah Dikonfirmasi !");
-                    this.dispose();
-                    new Layout_DashboardAdmin().setVisible(true);
-                    
+                else if (status.equals("pengembalian diterima")){
+                    for(int i=0;i<model.getRowCount();i++){
+                        String update = "UPDATE objek_pinjam SET jumlah_tersedia = jumlah_tersedia + "+model.getValueAt(i, 2)+" WHERE id_objek = "+model.getValueAt(i, 0)+" ;";
+                        PreparedStatement pe = conn.prepareStatement(update);
+                        hasilUp = pe.executeUpdate();
+                    }
+                    if (hasilUp > 0 && hasil > 0){
+                           JOptionPane.showMessageDialog(this,"Pengembalian Telah Dikonfirmasi !");
+                            this.dispose();
+                            new Layout_DashboardAdmin().setVisible(true);
+                    }
+                    else {
+                        JOptionPane.showMessageDialog(this,"Gagal !");
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Data Telah DiProses");
                 }
                 
             }
@@ -139,6 +169,7 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
         tblListPeminjaman = new javax.swing.JTable();
         btnTolak = new javax.swing.JButton();
         btnTerima = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -275,6 +306,13 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
             }
         });
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -283,6 +321,12 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 328, Short.MAX_VALUE)
+                        .addComponent(btnTolak)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTerima))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
@@ -290,12 +334,6 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(261, Short.MAX_VALUE)
-                .addComponent(btnTolak)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTerima)
-                .addGap(227, 227, 227))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -309,7 +347,8 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnTolak)
-                    .addComponent(btnTerima))
+                    .addComponent(btnTerima)
+                    .addComponent(btnBack))
                 .addGap(32, 32, 32))
         );
 
@@ -319,9 +358,16 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
     private void btnTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTolakActionPerformed
         // TODO add your handling code here:
         if (!taCatatan.getText().equals("")){
-            String status = "peminjaman ditolak";
-            String kodePeminjaman = tfKodePeminjaman.getText();
-            updateData(status,kodePeminjaman); 
+            if (btnTolak.getText().equals("Tolak Permintaan")){
+                String status = "peminjaman ditolak";
+                String kodePeminjaman = tfKodePeminjaman.getText();
+                updateData(status,kodePeminjaman);
+            }
+            else {
+                String status = "pengembalian ditolak";
+                String kodePeminjaman = tfKodePeminjaman.getText();
+                updateData(status,kodePeminjaman);
+            }
         }
         else {
            JOptionPane.showMessageDialog(this,"Tambahkan Catatan untuk Peminjam"); 
@@ -332,14 +378,29 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
     private void btnTerimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerimaActionPerformed
         // TODO add your handling code here:
         if (!taCatatan.getText().equals("")){
-            String status = "peminjaman diterima";
-            String kodePeminjaman = tfKodePeminjaman.getText();
-            updateData(status,kodePeminjaman); 
+            if (btnTerima.getText().equals("Terima Permintaan")){
+                String status = "peminjaman diterima";
+                String kodePeminjaman = tfKodePeminjaman.getText();
+                updateData(status,kodePeminjaman); 
+            }
+            else {
+                String status = "pengembalian diterima";
+                String kodePeminjaman = tfKodePeminjaman.getText();
+                updateData(status,kodePeminjaman); 
+            }
+            
         }
         else {
            JOptionPane.showMessageDialog(this,"Tambahkan Catatan untuk Peminjam"); 
         }
     }//GEN-LAST:event_btnTerimaActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Layout_DashboardAdmin().setVisible(true);
+        
+    }//GEN-LAST:event_btnBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -377,6 +438,7 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnTerima;
     private javax.swing.JButton btnTolak;
     private javax.swing.JLabel jLabel1;

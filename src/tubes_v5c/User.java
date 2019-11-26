@@ -18,15 +18,25 @@ public class User {
     private String password;
     private String nama;
     private String id;
+    private String status;
 
     public User() {
     }
     
-    public User(String username, String password, String nama, String id) {
+    public User(String username, String password, String nama, String id , String status) {
         this.username = username;
         this.password = password;
         this.nama = nama;
         this.id = id;
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     
     

@@ -23,18 +23,24 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel();
     private Connection conn;
     private ArrayList<Peminjaman> listPeminjaman;
+    private String querySelect;
+    private String statusP = "status='proses'";
+    private String statusData = "peminjaman diterima";
 
     /**
      * Creates new form Layout_DashboardAdmin
      */
     public Layout_DashboardAdmin() {
         initComponents();
+        cbStatus.setVisible(false);
         tblListPeminjaman.setModel(model);
         loadKolom();
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
-        loadList();
+        querySelect = "SELECT * FROM data_peminjaman WHERE status='proses' GROUP BY kode_peminjaman;";
+        loadList(querySelect);
         tampilList();
+        
     }
     
     private void loadKolom(){
@@ -42,15 +48,15 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         model.addColumn("Nama Peminjam");
         model.addColumn("Nama Organisasi");
         model.addColumn("Tanggal Peminjaman");
-        model.addColumn("Tanggal Pengembalian");  
+        model.addColumn("Tanggal Pengembalian");
+        model.addColumn("Status");
     }
     
-    private void loadList(){
+    private void loadList(String querySelect){
         if (conn != null){
             listPeminjaman = new ArrayList<>();
-            String query = "SELECT * FROM data_peminjaman WHERE status='proses' GROUP BY kode_peminjaman;";
             try {
-                PreparedStatement ps = conn.prepareStatement(query);
+                PreparedStatement ps = conn.prepareStatement(querySelect);
                 ResultSet rs = ps.executeQuery();
                 while(rs.next()){
                     String kodePeminjaman = rs.getString("kode_peminjaman");
@@ -84,16 +90,28 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         }
         for (Peminjaman pinjam : listPeminjaman){
             if (cbSort.getSelectedItem().equals(pinjam.getJenisPeminjaman())){
-                model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian()});
+                model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian(),pinjam.getStatus()});
+            }
+        }
+    }
+    
+    private void tampilListPinjam(String statusData){
+        model.setRowCount(0);
+        for(int i = 0;i<model.getRowCount();i++){
+            model.removeRow(i);
+        }
+        for (Peminjaman pinjam : listPeminjaman){
+            if (cbSort.getSelectedItem().equals(pinjam.getJenisPeminjaman()) && statusData.equals(pinjam.getStatus())){
+                model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian(),pinjam.getStatus()});
             }
         }
     }
     
     
-    private void cariData(String keyword){
+    private void cariData(String statusPinjam,String keyword){
         if (conn != null){
             listPeminjaman = new ArrayList<>();
-            String query = "SELECT * FROM data_peminjaman WHERE status='proses' AND kode_peminjaman LIKE '%"+keyword+"%' GROUP BY kode_peminjaman;";
+            String query = "SELECT * FROM data_peminjaman WHERE "+statusPinjam+" AND kode_peminjaman LIKE '%"+keyword+"%' GROUP BY kode_peminjaman;";
             try {
                 PreparedStatement ps = conn.prepareStatement(query);
                 ResultSet rs = ps.executeQuery();
@@ -131,33 +149,46 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lbNama = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         btnPermohonan = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnHistoryPeminjaman = new javax.swing.JButton();
+        btnHistoryPengembalian = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListPeminjaman = new javax.swing.JTable();
         tfCariKode = new javax.swing.JTextField();
         btnCariKode = new javax.swing.JButton();
         cbSort = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        lbTampil = new javax.swing.JLabel();
         btnDetail = new javax.swing.JButton();
+        cbStatus = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        lbNama.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        lbNama.setText("dasdsad");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED), "Menu"));
 
         btnPermohonan.setText("Permintaan Peminjaman");
+        btnPermohonan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPermohonanActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("History Peminjaman");
+        btnHistoryPeminjaman.setText("History Peminjaman");
+        btnHistoryPeminjaman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryPeminjamanActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("History Pengembalian");
+        btnHistoryPengembalian.setText("History Pengembalian");
+        btnHistoryPengembalian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistoryPengembalianActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Keluar");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -174,8 +205,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPermohonan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(btnHistoryPeminjaman, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                    .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -185,10 +216,10 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(btnPermohonan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnHistoryPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -220,7 +251,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setText("Tampilkan Permintaan :");
+        lbTampil.setText("Tampilkan Permintaan :");
 
         btnDetail.setText("Lihat Detail");
         btnDetail.addActionListener(new java.awt.event.ActionListener() {
@@ -229,46 +260,79 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        cbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ditolak", "Diterima" }));
+        cbStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbStatusActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(237, 237, 237))
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbTampil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap(471, Short.MAX_VALUE)
+                    .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(18, 18, 18)
+                    .addComponent(btnCariKode)
+                    .addContainerGap()))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lbTampil))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(cbStatus))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDetail)
+                .addGap(81, 81, 81))
+            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnCariKode))
+                    .addContainerGap(533, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCariKode))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(183, 183, 183))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCariKode))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnDetail)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -276,22 +340,16 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(616, Short.MAX_VALUE)
-                .addComponent(lbNama, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68))
-            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lbNama, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -318,11 +376,11 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         String keyword = tfCariKode.getText().trim();
         if (keyword.length() == 0){
-            loadList();
+            loadList(querySelect);
             tampilList();
         }
         else {
-            cariData(keyword);
+            cariData(statusP,keyword);
             tampilList();
         }
         
@@ -359,7 +417,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(this,"Pilih Data Peminjaman untuk Melihat Detail !");                  
         }
         else {
-          new Layout_DetailPeminjaman(sendData).setVisible(true);  
+            this.dispose();
+            new Layout_DetailPeminjaman(sendData).setVisible(true);  
         }
         }
         catch (Exception e){
@@ -367,6 +426,62 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnDetailActionPerformed
+
+    private void btnPermohonanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermohonanActionPerformed
+        // TODO add your handling code here:
+        cbStatus.setVisible(false);
+        querySelect = "SELECT * FROM data_peminjaman WHERE status='proses' GROUP BY kode_peminjaman;";
+        loadList(querySelect);
+        tampilList();
+        statusP = "status='proses'";
+    }//GEN-LAST:event_btnPermohonanActionPerformed
+
+    private void btnHistoryPeminjamanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryPeminjamanActionPerformed
+        // TODO add your handling code here:
+        cbStatus.setVisible(true);
+        querySelect = "SELECT * FROM data_peminjaman WHERE status='peminjaman ditolak' OR status = 'peminjaman diterima' GROUP BY kode_peminjaman;";
+        loadList(querySelect);
+        tampilList();
+        statusP = "status IN ('peminjaman ditolak','peminjaman diterima')";
+        statusData="peminjaman diterima";
+    }//GEN-LAST:event_btnHistoryPeminjamanActionPerformed
+
+    private void cbStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbStatusActionPerformed
+        // TODO add your handling code here:
+        for (int i = 0;i<model.getRowCount();i++){
+            model.removeRow(i);
+        }
+        String cbData = (String) cbStatus.getSelectedItem();
+        
+        if (cbData.equals("Diterima")){
+            if (statusData.equals("pengembalian diterima")||statusData.equals("pengembalian ditolak")){
+              statusData = "pengembalian diterima";  
+            }
+            else {
+                statusData = "peminjaman diterima";
+            }
+            
+        }
+        else {
+           if (statusData.equals("pengembalian diterima")||statusData.equals("pengembalian ditolak")){
+              statusData = "pengembalian ditolak";  
+            }
+            else {
+                statusData = "peminjaman ditolak";
+            }
+        }
+        tampilListPinjam(statusData);
+    }//GEN-LAST:event_cbStatusActionPerformed
+
+    private void btnHistoryPengembalianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistoryPengembalianActionPerformed
+        // TODO add your handling code here:
+        cbStatus.setVisible(true);
+        querySelect = "SELECT * FROM data_peminjaman WHERE status='pengembalian ditolak' OR status = 'pengembalian diterima' GROUP BY kode_peminjaman;";
+        loadList(querySelect);
+        tampilList();
+        statusP = "status IN ('pengembalian ditolak','pengembalian diterima')";
+        statusData="pengembalian diterima";
+    }//GEN-LAST:event_btnHistoryPengembalianActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,16 +521,17 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCariKode;
     private javax.swing.JButton btnDetail;
+    private javax.swing.JButton btnHistoryPeminjaman;
+    private javax.swing.JButton btnHistoryPengembalian;
     private javax.swing.JButton btnPermohonan;
     private javax.swing.JComboBox<String> cbSort;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton4;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lbNama;
+    private javax.swing.JLabel lbTampil;
     private javax.swing.JTable tblListPeminjaman;
     private javax.swing.JTextField tfCariKode;
     // End of variables declaration//GEN-END:variables

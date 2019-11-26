@@ -40,6 +40,7 @@ public class Layout_Login extends javax.swing.JFrame {
             String password = "";
             String nama = "";
             String id ="";
+            String status = "";
             String query = "SELECT * FROM user WHERE username = '"+tfUsername.getText()+"';";
             try {
                 PreparedStatement ps = conn.prepareStatement(query);
@@ -49,20 +50,28 @@ public class Layout_Login extends javax.swing.JFrame {
                     password = rs.getString("password");
                     nama = rs.getString("nama");
                     id = rs.getString("id");
+                    status = rs.getString("status");
                     
                 }
                 rs.close();
                 ps.close();
                 
                 if (tfUsername.getText().equals(username) && user.enkripsiPassword(psPassword.getText()).equals(password) ){
-                    user.setNama(nama);
-                    user.setId(id);
-                    user.setPassword(password);
-                    user.setUsername(username);
-                    JOptionPane.showMessageDialog(this,"Berhasil Login");
-                    Layout_DashboardUser Ldu = new Layout_DashboardUser(user);
-                    Ldu.setVisible(true);
-                    this.dispose();
+                    if (status.equals("user")){
+                        user.setNama(nama);
+                        user.setId(id);
+                        user.setPassword(password);
+                        user.setUsername(username);
+                        JOptionPane.showMessageDialog(this,"Berhasil Login");
+                        Layout_DashboardUser Ldu = new Layout_DashboardUser(user);
+                        Ldu.setVisible(true);
+                        this.dispose();
+                    }
+                    else {
+                        Layout_DashboardAdmin lda = new Layout_DashboardAdmin();
+                        lda.setVisible(true);
+                        this.dispose();
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Username atau Password Salah");
