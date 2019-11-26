@@ -100,9 +100,13 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         String status = "Tersedia";
         for (ObjekPinjam ruangan : listObjek){
             
-                    if (ruangan.getJumlahTersedia() < 0){
+                    if (ruangan.getJumlahTersedia() <= 0){
                         status = "Sedang Dalam Peminjaman";
                     }
+                    else {
+                        status = "Tersedia";
+                    }
+                    
              modelPinjam.addRow(new Object [] {ruangan.getId(),ruangan.getNamaObjek(),status});
         }
             
@@ -342,14 +346,20 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                 String tAwal = dtf.format(tanggalAwal);
                 String tAkhir = dtf.format(tanggalAkhir);
                 String kodePinjam = new Peminjaman().generateRandomString();
+                String status = (String) modelPinjam.getValueAt(barisAktif,2);
 
                 if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
+                    if (status.equals("Tersedia")){
                         int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
                         int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
                         int idAkun = Integer.parseInt(id);
                         DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
                         listPeminjaman.add(dpb);
                         insertPeminjaman();
+                    }
+                    else {
+                       JOptionPane.showMessageDialog(this,"Ruangan Sedang Dalam Peminjaman"); 
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir");

@@ -89,23 +89,6 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         }
     }
     
-    private void updateData (String status,String kodePeminjaman){
-        if (conn != null){
-            try{
-                int hasil = 0;
-                String query = "UPDATE data_peminjaman SET status = '"+status+"' WHERE kode_peminjaman='"+kodePeminjaman+"'";
-                PreparedStatement ps = conn.prepareStatement(query);
-                hasil = ps.executeUpdate();
-                if (hasil > 0){
-                    JOptionPane.showMessageDialog(this,"Permintaan Peminjaman Telah Dikonfirmasi !");                    
-                }
-                
-            }
-           catch (SQLException ex){
-                Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-}
     
     private void cariData(String keyword){
         if (conn != null){
@@ -161,8 +144,6 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         btnCariKode = new javax.swing.JButton();
         cbSort = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
-        btnTolak = new javax.swing.JButton();
-        btnTerima = new javax.swing.JButton();
         btnDetail = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -241,21 +222,12 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
 
         jLabel1.setText("Tampilkan Permintaan :");
 
-        btnTolak.setText("Tolak Permintaan");
-        btnTolak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTolakActionPerformed(evt);
-            }
-        });
-
-        btnTerima.setText("Terima Permintaan");
-        btnTerima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerimaActionPerformed(evt);
-            }
-        });
-
         btnDetail.setText("Lihat Detail");
+        btnDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetailActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -264,7 +236,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -276,14 +248,10 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                         .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
-                .addComponent(btnTolak)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnTerima)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDetail)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(183, 183, 183))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -298,11 +266,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnTolak)
-                    .addComponent(btnTerima)
-                    .addComponent(btnDetail))
+                .addGap(18, 18, 18)
+                .addComponent(btnDetail)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -349,46 +314,6 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         tampilList();
     }//GEN-LAST:event_cbSortActionPerformed
 
-    private void btnTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTolakActionPerformed
-        // TODO add your handling code here:
-        String status = "peminjaman ditolak";
-        int barisAktif = tblListPeminjaman.getSelectedRow();
-        String kodePeminjaman =(String) model.getValueAt(barisAktif, 0);
-        updateData(status,kodePeminjaman);
-        
-        for (int i = 0;i<listPeminjaman.size();i++){
-            if (listPeminjaman.get(i).getKodePeminjaman().equals(kodePeminjaman)){
-                listPeminjaman.remove(i);
-            }
-        }
-        for (int i = 0;i<model.getRowCount();i++){
-            String kondisi = (String) model.getValueAt(i, 0);
-            if ( kondisi.equals(kodePeminjaman)){
-                model.removeRow(i);
-            }
-        }
-    }//GEN-LAST:event_btnTolakActionPerformed
-
-    private void btnTerimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerimaActionPerformed
-        // TODO add your handling code here:
-        String status = "peminjaman diterima";
-        int barisAktif = tblListPeminjaman.getSelectedRow();
-        String kodePeminjaman =(String) model.getValueAt(barisAktif, 0);
-        updateData(status,kodePeminjaman);
-        
-        for (int i = 0;i<listPeminjaman.size();i++){
-            if (listPeminjaman.get(i).getKodePeminjaman().equals(kodePeminjaman)){
-                listPeminjaman.remove(i);
-            }
-        }
-        for (int i = 0;i<model.getRowCount();i++){
-            String kondisi = (String) model.getValueAt(i, 0);
-            if ( kondisi.equals(kodePeminjaman)){
-                model.removeRow(i);
-            }
-        }
-    }//GEN-LAST:event_btnTerimaActionPerformed
-
     private void btnCariKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariKodeActionPerformed
         // TODO add your handling code here:
         String keyword = tfCariKode.getText().trim();
@@ -402,6 +327,46 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnCariKodeActionPerformed
+
+    private void btnDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetailActionPerformed
+        // TODO add your handling code here:
+        ArrayList<Peminjaman> sendData = new ArrayList<>();
+        int cek  = 0;
+        int barisAktif = tblListPeminjaman.getSelectedRow();
+        try{
+        for(int i = 0;i < listPeminjaman.size();i++){
+            if(listPeminjaman.get(i).getKodePeminjaman().equals(model.getValueAt(barisAktif, 0))){
+                Peminjaman dataPinjam = new Peminjaman(
+                     listPeminjaman.get(i).getKodePeminjaman(),
+                        listPeminjaman.get(i).getJenisPeminjaman(),
+                        listPeminjaman.get(i).getNamaPeminjam(),
+                        listPeminjaman.get(i).getNamaOrganisasi(),
+                        listPeminjaman.get(i).getNamaKegiatan(),
+                        listPeminjaman.get(i).getIdObjek(),
+                        listPeminjaman.get(i).getJumlahBarang(),
+                        listPeminjaman.get(i).getTanggalPeminjaman(),
+                        listPeminjaman.get(i).getTanggalPengembalian(),
+                        listPeminjaman.get(i).getStatus(),
+                        listPeminjaman.get(i).getCatatan(),
+                        listPeminjaman.get(i).getIdUser()
+                );
+                sendData.add(dataPinjam);
+                cek = 1;
+                break;
+            }            
+        }
+        if (cek == 0){
+             JOptionPane.showMessageDialog(this,"Pilih Data Peminjaman untuk Melihat Detail !");                  
+        }
+        else {
+          new Layout_DetailPeminjaman(sendData).setVisible(true);  
+        }
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(this,"Pilih Data Peminjaman untuk Melihat Detail !"); 
+        }
+        
+    }//GEN-LAST:event_btnDetailActionPerformed
 
     /**
      * @param args the command line arguments
@@ -442,8 +407,6 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnCariKode;
     private javax.swing.JButton btnDetail;
     private javax.swing.JButton btnPermohonan;
-    private javax.swing.JButton btnTerima;
-    private javax.swing.JButton btnTolak;
     private javax.swing.JComboBox<String> cbSort;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
