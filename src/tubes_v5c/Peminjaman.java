@@ -48,6 +48,7 @@ public class Peminjaman {
     }
 
     public Peminjaman() {
+        // tambah komentar
     }
     
 
