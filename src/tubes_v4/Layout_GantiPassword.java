@@ -20,9 +20,9 @@ import javax.swing.JOptionPane;
  */
 public class Layout_GantiPassword extends javax.swing.JFrame {
     private Connection conn;
-    private String oldPass;
-    private String newPass;
-    private String confirmPass;
+    private String oldPass=null;
+    private String newPass=null;
+    private String confirmPass=null;
     private ArrayList<User> password;
     private ArrayList<User> gantiPass = new ArrayList<>();
     
@@ -36,8 +36,22 @@ public class Layout_GantiPassword extends javax.swing.JFrame {
     }
     
      public void GantiPassword(){
-         String query = "UPDATE user SET password = ''";
-     } 
+         if (conn != null){
+            try{
+                int hasil = 0;
+                for(int i = 0 ; i < gantiPass.size();i++){
+                String query = "UPDATE user SET password ='"+newPass+"' WHERE password='"+oldPass+"'";
+                PreparedStatement ps = conn.prepareStatement(query);
+                hasil = ps.executeUpdate();
+                } 
+            }
+            catch(SQLException ex){
+                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                 
+                 JOptionPane.showMessageDialog(this,"Password tidak cocok");
+            }
+         }
+     }
      private void resetData(){  
         psOld.setText("");
         psNew.setText("");
@@ -195,13 +209,12 @@ public class Layout_GantiPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
         resetData();
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnGantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGantiActionPerformed
         // TODO add your handling code here:
-       
+       GantiPassword();
     }//GEN-LAST:event_btnGantiActionPerformed
 
     private void psOldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psOldActionPerformed
