@@ -100,9 +100,13 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         String status = "Tersedia";
         for (ObjekPinjam ruangan : listObjek){
             
-                    if (ruangan.getJumlahTersedia() < 0){
+                    if (ruangan.getJumlahTersedia() <= 0){
                         status = "Sedang Dalam Peminjaman";
                     }
+                    else {
+                        status = "Tersedia";
+                    }
+                    
              modelPinjam.addRow(new Object [] {ruangan.getId(),ruangan.getNamaObjek(),status});
         }
             
@@ -172,6 +176,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         tblRuanganPinjam = new javax.swing.JTable();
         btnProses = new javax.swing.JButton();
         dtAwal = new com.toedter.calendar.JDateChooser();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -226,13 +231,20 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGap(58, 58, 58)
@@ -257,8 +269,10 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(74, 74, 74))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnProses)))
                 .addContainerGap())
         );
@@ -286,7 +300,9 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btnProses)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnProses)
+                    .addComponent(jButton1))
                 .addGap(7, 7, 7))
         );
 
@@ -330,14 +346,20 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                 String tAwal = dtf.format(tanggalAwal);
                 String tAkhir = dtf.format(tanggalAkhir);
                 String kodePinjam = new Peminjaman().generateRandomString();
+                String status = (String) modelPinjam.getValueAt(barisAktif,2);
 
                 if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
+                    if (status.equals("Tersedia")){
                         int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
                         int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
                         int idAkun = Integer.parseInt(id);
                         DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
                         listPeminjaman.add(dpb);
                         insertPeminjaman();
+                    }
+                    else {
+                       JOptionPane.showMessageDialog(this,"Ruangan Sedang Dalam Peminjaman"); 
+                    }
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir");
@@ -352,6 +374,16 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !");
         }
     }//GEN-LAST:event_btnProsesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        User user = new User();
+        user.setUsername(username);
+        user.setId(id);
+        user.setNama(nama);
+        this.dispose();
+        new Layout_DashboardUser(user).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -392,6 +424,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     private javax.swing.JButton btnProses;
     private com.toedter.calendar.JDateChooser dtAkhir;
     private com.toedter.calendar.JDateChooser dtAwal;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
