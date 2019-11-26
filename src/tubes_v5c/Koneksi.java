@@ -20,10 +20,10 @@ import javax.swing.JOptionPane;
 public class Koneksi {
     private static Connection conn;
     private static final String DB_DRIVER = "com.mysql.jdbc.Driver";
-    private static final String DB_NAME = "db_logistik";
+    private static final String DB_NAME = "logistik";
     private static final String DB_URL = "jdbc:mysql://127.0.0.1:3306/" + DB_NAME;
-    private static final String DB_UNAME = "logistik";
-    private static final String DB_PASS = "logistik123";
+    private static final String DB_UNAME = "root";
+    private static final String DB_PASS = "";
     
     public static Connection bukaKoneksi() {
         if (conn == null){

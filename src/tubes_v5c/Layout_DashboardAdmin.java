@@ -83,44 +83,44 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             model.removeRow(i);
         }
         for (Peminjaman pinjam : listPeminjaman){
-            if (cbSort.getSelectedItem().equals(pinjam.getJenisPeminjaman())){
+//            if (cbSort.getSelectedItem().equals(pinjam.getJenisPeminjaman())){
                 model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian()});
-            }
+//            }
         }
     }
     
     
-    private void cariData(String keyword){
-        if (conn != null){
-            listPeminjaman = new ArrayList<>();
-            String query = "SELECT * FROM data_peminjaman WHERE status='proses' AND kode_peminjaman LIKE '%"+keyword+"%' GROUP BY kode_peminjaman;";
-            try {
-                PreparedStatement ps = conn.prepareStatement(query);
-                ResultSet rs = ps.executeQuery();
-                while(rs.next()){
-                    String kodePeminjaman = rs.getString("kode_peminjaman");
-                    String jenisPeminjaman = rs.getString("jenis_peminjaman");
-                    String namaPeminjam = rs.getString("nama_peminjam");
-                    String namaOrganisasi = rs.getString("nama_organisasi");
-                    String namaKegiatan = rs.getString("nama_kegiatan");
-                    int idObjek = rs.getInt("id_objek");
-                    int jumlahBarang = rs.getInt("jumlah_barang");
-                    String tanggalPeminjaman = rs.getString("tanggal_peminjaman");
-                    String tanggalPengembalian = rs.getString("tanggal_pengembalian");
-                    String status = rs.getString("status");
-                    String catatan = rs.getString("catatan");
-                    int idUser = rs.getInt("id_user");
-                    Peminjaman objek = new Peminjaman(kodePeminjaman,jenisPeminjaman,namaPeminjam,namaOrganisasi,namaKegiatan,idObjek,jumlahBarang,tanggalPeminjaman,tanggalPengembalian,status,catatan,idUser);
-                    listPeminjaman.add(objek);
-                }
-                rs.close();
-                ps.close();
-            }
-            catch (SQLException ex){
-                Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-    }
+//    private void cariData(String keyword){
+//        if (conn != null){
+//            listPeminjaman = new ArrayList<>();
+//            String query = "SELECT * FROM data_peminjaman WHERE status='proses' AND kode_peminjaman LIKE '%"+keyword+"%' GROUP BY kode_peminjaman;";
+//            try {
+//                PreparedStatement ps = conn.prepareStatement(query);
+//                ResultSet rs = ps.executeQuery();
+//                while(rs.next()){
+//                    String kodePeminjaman = rs.getString("kode_peminjaman");
+//                    String jenisPeminjaman = rs.getString("jenis_peminjaman");
+//                    String namaPeminjam = rs.getString("nama_peminjam");
+//                    String namaOrganisasi = rs.getString("nama_organisasi");
+//                    String namaKegiatan = rs.getString("nama_kegiatan");
+//                    int idObjek = rs.getInt("id_objek");
+//                    int jumlahBarang = rs.getInt("jumlah_barang");
+//                    String tanggalPeminjaman = rs.getString("tanggal_peminjaman");
+//                    String tanggalPengembalian = rs.getString("tanggal_pengembalian");
+//                    String status = rs.getString("status");
+//                    String catatan = rs.getString("catatan");
+//                    int idUser = rs.getInt("id_user");
+//                    Peminjaman objek = new Peminjaman(kodePeminjaman,jenisPeminjaman,namaPeminjam,namaOrganisasi,namaKegiatan,idObjek,jumlahBarang,tanggalPeminjaman,tanggalPengembalian,status,catatan,idUser);
+//                    listPeminjaman.add(objek);
+//                }
+//                rs.close();
+//                ps.close();
+//            }
+//            catch (SQLException ex){
+//                Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -311,20 +311,20 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         for (int i = 0;i<model.getRowCount();i++){
             model.removeRow(i);
         }
-        tampilList();
+//        tampilList();
     }//GEN-LAST:event_cbSortActionPerformed
 
     private void btnCariKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariKodeActionPerformed
         // TODO add your handling code here:
-        String keyword = tfCariKode.getText().trim();
-        if (keyword.length() == 0){
-            loadList();
-            tampilList();
-        }
-        else {
-            cariData(keyword);
-            tampilList();
-        }
+//        String keyword = tfCariKode.getText().trim();
+//        if (keyword.length() == 0){
+//            loadList();
+//            tampilList();
+//        }
+//        else {
+//            cariData(keyword);
+//            tampilList();
+//        }
         
     }//GEN-LAST:event_btnCariKodeActionPerformed
 
