@@ -35,19 +35,16 @@ public class Layout_GantiPassword extends javax.swing.JFrame {
         initComponents();
     }
     
-     public void GantiPassword(){
+     public void GantiPassword(String newPass,String oldPass){
          if (conn != null){
             try{
                 int hasil = 0;
-                for(int i = 0 ; i < gantiPass.size();i++){
                 String query = "UPDATE user SET password ='"+newPass+"' WHERE password='"+oldPass+"'";
                 PreparedStatement ps = conn.prepareStatement(query);
                 hasil = ps.executeUpdate();
-                } 
             }
             catch(SQLException ex){
                  Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                 
                  JOptionPane.showMessageDialog(this,"Password tidak cocok");
             }
          }
@@ -213,8 +210,16 @@ public class Layout_GantiPassword extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnGantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGantiActionPerformed
-        // TODO add your handling code here:
-       GantiPassword();
+       String oldPass=User.enkripsiPassword(String.valueOf(psOld.getPassword()));
+       String newPass = User.enkripsiPassword(String.valueOf(psNew.getPassword()));
+       String confirmPass=User.enkripsiPassword(String.valueOf(psConfirm.getPassword()));
+        if(!(oldPass.equals("") || newPass.equals("")|| confirmPass.equals(""))){
+             GantiPassword(newPass,oldPass);
+             JOptionPane.showMessageDialog(this,"Password berhasil diganti");
+        }
+        else {
+            JOptionPane.showMessageDialog(this,"Pastikan Semua Data Terisi!");
+        }
     }//GEN-LAST:event_btnGantiActionPerformed
 
     private void psOldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_psOldActionPerformed
