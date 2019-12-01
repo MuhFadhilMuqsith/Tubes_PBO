@@ -12,25 +12,25 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author _MFMq_PC
  */
-public class Layout_DetailPeminjaman extends javax.swing.JFrame {
+public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel();
     private Connection conn;
     private ArrayList<Peminjaman> listPeminjaman;
 
     /**
-     * Creates new form Layout_DetailPeminjaman
+     * Creates new form Layout_DetailPeminjamanUser
      */
-    public Layout_DetailPeminjaman(ArrayList<Peminjaman> sendData) {
+    public Layout_DetailPeminjamanUser(ArrayList<Peminjaman> sendData) {
         initComponents();
         this.setLocationRelativeTo(null);
-        tblListPeminjaman.setModel(model);       
+        this.getRootPane().setDefaultButton(btnBack);
+        tblListPeminjaman.setModel(model);
         loadKolom();
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
@@ -43,25 +43,11 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
             tfTanggalPeminjaman.setText(sendData.get(i).getTanggalPeminjaman());
             tfTanggalPengembalian.setText(sendData.get(i).getTanggalPengembalian());
             taCatatan.setText(sendData.get(i).getCatatan());
-            if (sendData.get(i).getStatus().equals("proses")){
-                btnTerima.setText("Terima Permintaan");
-                btnTolak.setText("Tolak Permintaan");
-            }
-            else if (sendData.get(i).getStatus().equals("peminjaman diterima")) {
-                btnTerima.setText("Terima Pengembalian");
-                 btnTolak.setVisible(false);
-            }
-            else {
-                btnTerima.setVisible(false);
-                btnTolak.setVisible(false);
-            }
         }
         loadDetail(tfKodePeminjaman.getText());
     }
-
     
-    
-     private void loadKolom(){
+    private void loadKolom(){
         model.addColumn("Id");
         model.addColumn("Nama");
         model.addColumn("Jumlah Peminjaman");
@@ -90,55 +76,6 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
             }
         }
      }
-     
-     private void updateData (String status,String kodePeminjaman){
-        if (conn != null){
-            try{
-                int hasil = 0;
-                int hasilUp = 0;
-                String query = "UPDATE data_peminjaman SET status = '"+status+"' , catatan = '"+taCatatan.getText()+"' WHERE kode_peminjaman='"+kodePeminjaman+"'";
-                PreparedStatement ps = conn.prepareStatement(query);
-                hasil = ps.executeUpdate();
-                if (status.equals("peminjaman diterima")){
-                    for(int i=0;i<model.getRowCount();i++){
-                        String update = "UPDATE objek_pinjam SET jumlah_tersedia = jumlah_tersedia - "+model.getValueAt(i, 2)+" WHERE id_objek = "+model.getValueAt(i, 0)+" ;";
-                        PreparedStatement pe = conn.prepareStatement(update);
-                        hasilUp = pe.executeUpdate();
-                    }
-                    if (hasilUp > 0 && hasil > 0){
-                           JOptionPane.showMessageDialog(this,"Peminjaman Telah Dikonfirmasi !");
-                            this.dispose();
-                            new Layout_DashboardAdmin().setVisible(true);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this,"Gagal !");
-                    }                    
-                }
-                else if (status.equals("pengembalian diterima")){
-                    for(int i=0;i<model.getRowCount();i++){
-                        String update = "UPDATE objek_pinjam SET jumlah_tersedia = jumlah_tersedia + "+model.getValueAt(i, 2)+" WHERE id_objek = "+model.getValueAt(i, 0)+" ;";
-                        PreparedStatement pe = conn.prepareStatement(update);
-                        hasilUp = pe.executeUpdate();
-                    }
-                    if (hasilUp > 0 && hasil > 0){
-                           JOptionPane.showMessageDialog(this,"Pengembalian Telah Dikonfirmasi !");
-                            this.dispose();
-                            new Layout_DashboardAdmin().setVisible(true);
-                    }
-                    else {
-                        JOptionPane.showMessageDialog(this,"Gagal !");
-                    }
-                }
-                else {
-                    JOptionPane.showMessageDialog(this,"Data Telah DiProses");
-                }
-                
-            }
-           catch (SQLException ex){
-                Logger.getLogger(Layout_DetailPeminjaman.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -169,17 +106,14 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
         taCatatan = new javax.swing.JTextArea();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListPeminjaman = new javax.swing.JTable();
-        btnTolak = new javax.swing.JButton();
-        btnTerima = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 153, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 153, 255));
         jLabel1.setText("Detail Informasi");
 
         jPanel1.setBackground(new java.awt.Color(51, 153, 255));
@@ -223,8 +157,9 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Tambahkan Catatan");
+        jLabel8.setText("Catatan");
 
+        taCatatan.setEditable(false);
         taCatatan.setColumns(20);
         taCatatan.setRows(5);
         jScrollPane2.setViewportView(taCatatan);
@@ -296,7 +231,7 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(43, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -314,28 +249,8 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblListPeminjaman);
 
-        btnTolak.setBackground(new java.awt.Color(51, 153, 255));
-        btnTolak.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnTolak.setForeground(new java.awt.Color(255, 255, 255));
-        btnTolak.setText("Tolak Permintaan");
-        btnTolak.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTolakActionPerformed(evt);
-            }
-        });
-
-        btnTerima.setBackground(new java.awt.Color(51, 153, 255));
-        btnTerima.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        btnTerima.setForeground(new java.awt.Color(255, 255, 255));
-        btnTerima.setText("Terima Permintaan");
-        btnTerima.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTerimaActionPerformed(evt);
-            }
-        });
-
         btnBack.setBackground(new java.awt.Color(51, 153, 255));
-        btnBack.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnBack.setForeground(new java.awt.Color(255, 255, 255));
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -352,18 +267,14 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnTolak)
-                        .addGap(21, 21, 21)
-                        .addComponent(btnTerima)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -371,24 +282,22 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnTolak, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnTerima, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,51 +307,9 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnTolakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTolakActionPerformed
-        // TODO add your handling code here:
-        if (!taCatatan.getText().equals("")){
-            if (btnTolak.getText().equals("Tolak Permintaan")){
-                String status = "peminjaman ditolak";
-                String kodePeminjaman = tfKodePeminjaman.getText();
-                updateData(status,kodePeminjaman);
-            }
-            else {
-                String status = "pengembalian ditolak";
-                String kodePeminjaman = tfKodePeminjaman.getText();
-                updateData(status,kodePeminjaman);
-            }
-        }
-        else {
-           JOptionPane.showMessageDialog(this,"Tambahkan Catatan untuk Peminjam"); 
-        }
-        
-    }//GEN-LAST:event_btnTolakActionPerformed
-
-    private void btnTerimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerimaActionPerformed
-        // TODO add your handling code here:
-        if (!taCatatan.getText().equals("")){
-            if (btnTerima.getText().equals("Terima Permintaan")){
-                String status = "peminjaman diterima";
-                String kodePeminjaman = tfKodePeminjaman.getText();
-                updateData(status,kodePeminjaman); 
-            }
-            else {
-                String status = "pengembalian diterima";
-                String kodePeminjaman = tfKodePeminjaman.getText();
-                updateData(status,kodePeminjaman); 
-            }
-            
-        }
-        else {
-           JOptionPane.showMessageDialog(this,"Tambahkan Catatan untuk Peminjam"); 
-        }
-    }//GEN-LAST:event_btnTerimaActionPerformed
-
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new Layout_DashboardAdmin().setVisible(true);
-        
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**
@@ -462,13 +329,13 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Layout_DetailPeminjaman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_DetailPeminjamanUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Layout_DetailPeminjaman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_DetailPeminjamanUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Layout_DetailPeminjaman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_DetailPeminjamanUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Layout_DetailPeminjaman.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_DetailPeminjamanUser.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -482,8 +349,6 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnTerima;
-    private javax.swing.JButton btnTolak;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

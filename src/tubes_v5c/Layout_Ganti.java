@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -18,76 +19,48 @@ import javax.swing.JOptionPane;
  *
  * @author _MFMq_PC
  */
-public class Layout_Login extends javax.swing.JFrame {
+public class Layout_Ganti extends javax.swing.JFrame {
     private Connection conn;
+    private String nama;
+    private String username;
+    private String id;
+    
+    private String oldPass=null;
+    private String newPass=null;
+    private String confirmPass=null;
+    private ArrayList<User> password;
+    private ArrayList<User> gantiPass = new ArrayList<>();
     
     /**
-     * Creates new form Layout_Login
+     * Creates new form NewJFrame
      */
-    public Layout_Login() {
-        initComponents();
-        this.setLocationRelativeTo(null);
-        this.getRootPane().setDefaultButton(btnLogin);
+    public Layout_Ganti(User user) {
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
-        
-    }
-
-    private void cekLogin(){
-        if (conn != null){
-            User user = new User();
-            String username = "";
-            String password = "";
-            String nama = "";
-            String id ="";
-            String status = "";
-            String query = "SELECT * FROM user WHERE username = '"+tfUsername.getText()+"';";
-            try {
-                PreparedStatement ps = conn.prepareStatement(query);
-                ResultSet rs = ps.executeQuery();
-                while(rs.next()){
-                    username = rs.getString("username");
-                    password = rs.getString("password");
-                    nama = rs.getString("nama");
-                    id = rs.getString("id");
-                    status = rs.getString("status");
-                    
-                }
-                rs.close();
-                ps.close();
-                
-                if (tfUsername.getText().equals(username) && user.enkripsiPassword(psPassword.getText()).equals(password) ){
-                    if (status.equals("user")){
-                        user.setNama(nama);
-                        user.setId(id);
-                        user.setPassword(password);
-                        user.setUsername(username);
-                        JOptionPane.showMessageDialog(this,"Berhasil Login");
-                        Layout_DashboardUser Ldu = new Layout_DashboardUser(user);
-                        Ldu.setVisible(true);
-                        this.dispose();
-                    }
-                    else {
-                        Layout_DashboardAdmin lda = new Layout_DashboardAdmin();
-                        lda.setVisible(true);
-                        this.dispose();
-                    }
-                }
-                else {
-                    JOptionPane.showMessageDialog(this,"Username atau Password Salah");
-                    resetData();
-                }
-            }
-            catch (SQLException ex){
-                Logger.getLogger(Layout_Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        }
+        initComponents();
+        nama = user.getNama();
+        username = user.getUsername();
+        id = user.getId();
     }
     
-   private void resetData(){  
-        tfUsername.setText("");
-        psPassword.setText("");
+     public void GantiPassword(String newPass,String oldPass){
+         if (conn != null){
+            try{
+                int hasil = 0;
+                String query = "UPDATE user SET password ='"+newPass+"' WHERE password='"+oldPass+"' AND username = '"+username+"'";
+                PreparedStatement ps = conn.prepareStatement(query);
+                hasil = ps.executeUpdate();
+            }
+            catch(SQLException ex){
+                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
+                 JOptionPane.showMessageDialog(this,"Password tidak cocok");
+            }
+         }
+     }
+     private void resetData(){  
+        psOld.setText("");
+        psNew.setText("");
+        psConfirm.setText("");
     }
     
 
@@ -106,14 +79,15 @@ public class Layout_Login extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        tfUsername = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        psPassword = new javax.swing.JPasswordField();
-        btnLogin = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        psOld = new javax.swing.JPasswordField();
+        btnGanti = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        psNew = new javax.swing.JPasswordField();
+        jLabel9 = new javax.swing.JLabel();
+        psConfirm = new javax.swing.JPasswordField();
+        jLabel10 = new javax.swing.JLabel();
+        btnReset = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(51, 153, 255));
@@ -151,7 +125,7 @@ public class Layout_Login extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(104, Short.MAX_VALUE)
+                .addContainerGap(98, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,37 +153,38 @@ public class Layout_Login extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel2.setText("Username :");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("Password :");
+        jLabel3.setText("Password lama :");
 
-        btnLogin.setBackground(new java.awt.Color(51, 153, 255));
-        btnLogin.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnLogin.setForeground(new java.awt.Color(255, 255, 255));
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+        btnGanti.setBackground(new java.awt.Color(51, 153, 255));
+        btnGanti.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnGanti.setForeground(new java.awt.Color(255, 255, 255));
+        btnGanti.setText("Ganti Password");
+        btnGanti.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 11)); // NOI18N
-        jLabel5.setText("Belum Punya Akun ?");
-
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 11)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 255));
-        jLabel4.setText("Registrasi Disini");
-        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel4MouseClicked(evt);
+                btnGantiActionPerformed(evt);
             }
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(51, 153, 255));
-        jLabel1.setText("Login");
+        jLabel1.setText("Ganti Password");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("Password Baru :");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setText("Konfirmasi :");
+
+        btnReset.setBackground(new java.awt.Color(51, 153, 255));
+        btnReset.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnReset.setForeground(new java.awt.Color(255, 255, 255));
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -218,46 +193,52 @@ public class Layout_Login extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addGap(26, 26, 26)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
+                                .addComponent(jLabel3)
                                 .addGap(35, 35, 35)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(tfUsername, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(psPassword, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(42, Short.MAX_VALUE))
+                                .addComponent(psOld, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(35, 35, 35)
+                                .addComponent(psNew, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(35, 35, 35)
+                                .addComponent(psConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGanti, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel1)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(23, 23, 23)
                 .addComponent(jLabel1)
-                .addGap(62, 62, 62)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tfUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(psPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
                 .addGap(45, 45, 45)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
-                .addGap(23, 23, 23))
+                    .addComponent(psOld, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(psNew, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(psConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGanti, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(72, 72, 72))
         );
 
         getContentPane().add(jPanel1);
@@ -265,24 +246,25 @@ public class Layout_Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // TODO add your handling code here:
-        String username = tfUsername.getText();
-        String password = psPassword.getText();
-        if(!(username.equals("") || password.equals(""))){
-             cekLogin();
+    private void btnGantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGantiActionPerformed
+       String oldPass=User.enkripsiPassword(String.valueOf(psOld.getPassword()));
+       String newPass = User.enkripsiPassword(String.valueOf(psNew.getPassword()));
+       String confirmPass=User.enkripsiPassword(String.valueOf(psConfirm.getPassword()));
+        if(!(oldPass.equals("") || newPass.equals("")|| confirmPass.equals(""))){
+             GantiPassword(newPass,oldPass);
+             JOptionPane.showMessageDialog(this,"Password berhasil diganti");
+             
         }
         else {
             JOptionPane.showMessageDialog(this,"Pastikan Semua Data Terisi!");
         }
-        
-    }//GEN-LAST:event_btnLoginActionPerformed
 
-    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+    }//GEN-LAST:event_btnGantiActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        this.dispose();
-        new Layout_Register().setVisible(true);
-    }//GEN-LAST:event_jLabel4MouseClicked
+        resetData();
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -301,38 +283,40 @@ public class Layout_Login extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Layout_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_Ganti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Layout_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_Ganti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Layout_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_Ganti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Layout_Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Layout_Ganti.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Layout_Login().setVisible(true);
+               
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnGanti;
+    private javax.swing.JButton btnReset;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPasswordField psPassword;
-    private javax.swing.JTextField tfUsername;
+    private javax.swing.JPasswordField psConfirm;
+    private javax.swing.JPasswordField psNew;
+    private javax.swing.JPasswordField psOld;
     // End of variables declaration//GEN-END:variables
 }
