@@ -1004,9 +1004,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
         int total = Integer.parseInt(tfETotalJumlah.getText());
         int tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
-        int id = Integer.parseInt(lblID.getText());
              
-             if (total >= tersedia && tersedia <= total){
+        if (!lblID.getText().equals("")){  
+        if (total >= tersedia && tersedia <= total){
                     updateData();
                     loadObjek();
                     tampilObjek();
@@ -1017,7 +1017,13 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                     JOptionPane.showMessageDialog(this,"Pastikan Jumlah Tersedia Lebih Kecil Dari Total \n Atau Sebaliknya!");
                 }
           
-
+        }
+        else {
+                    updateData();
+                    loadObjek();
+                    tampilObjek();
+                    resetObjek();
+        }
     }//GEN-LAST:event_btnESubmintActionPerformed
 
     private void mcBulanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcBulanMouseClicked
