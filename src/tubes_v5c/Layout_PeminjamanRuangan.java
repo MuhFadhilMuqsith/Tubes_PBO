@@ -181,6 +181,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Peminjaman Ruangan");
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -371,24 +372,31 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                 String tAkhir = dtf.format(tanggalAkhir);
                 String kodePinjam = new Peminjaman().generateRandomString();
                 String status = (String) modelPinjam.getValueAt(barisAktif,2);
+                
+                 if (!(namaPeminjam.equals("") || namaOrganisasi.equals("") || namaKegiatan.equals(""))){
 
-                if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
-                    if (status.equals("Tersedia")){
-                        int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
-                        int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
-                        int idAkun = Integer.parseInt(id);
-                        Peminjaman dpb = new Peminjaman(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
-                        listPeminjaman.add(dpb);
-                        insertPeminjaman();
+                    if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
+                        if (status.equals("Tersedia")){
+                            int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
+                            int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
+                            int idAkun = Integer.parseInt(id);
+                            Peminjaman dpb = new Peminjaman(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
+                            listPeminjaman.add(dpb);
+                            insertPeminjaman();
+                        }
+                        else {
+                           JOptionPane.showMessageDialog(this,"Ruangan Sedang Dalam Peminjaman"); 
+                        }
                     }
                     else {
-                       JOptionPane.showMessageDialog(this,"Ruangan Sedang Dalam Peminjaman"); 
+                        JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir");
                     }
-                }
-                else {
-                    JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir");
-                }
+                 }
+                 else {
+                     JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");
+                 }
             }
+                 
             catch (Exception e){
                 JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");
                 Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, e);

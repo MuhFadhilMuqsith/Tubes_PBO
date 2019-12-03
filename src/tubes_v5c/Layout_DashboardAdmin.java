@@ -249,8 +249,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 else {
                     JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(Layout_DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+            catch (Exception e) {
+               JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");         
             }
         }
         else {
@@ -274,8 +275,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 else {
                     JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(Layout_DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            catch (Exception ex) {
+               JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");         
             }
         }
     }
@@ -332,6 +334,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         cbObjek = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Admin Page");
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -574,9 +577,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel7)
-                        .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
                     .addComponent(jButton1))
                 .addGap(8, 8, 8)
                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -870,7 +872,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         querySelect = "SELECT * FROM data_peminjaman WHERE status='peminjaman ditolak' OR status = 'peminjaman diterima' GROUP BY kode_peminjaman;";
         loadList(querySelect);
         tampilList();
-        statusP = "status IN ('peminjaman ditolak','peminjaman diterima')";
+        statusP = "status IN ('proses','peminjaman ditolak','peminjaman diterima','pengembalian diterima')";
         statusData="peminjaman diterima";
     }//GEN-LAST:event_btnHistoryPeminjamanActionPerformed
 
@@ -907,7 +909,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         querySelect = "SELECT * FROM data_peminjaman WHERE status='pengembalian ditolak' OR status = 'pengembalian diterima' GROUP BY kode_peminjaman;";
         loadList(querySelect);
         tampilList();
-        statusP = "status IN ('pengembalian ditolak','pengembalian diterima')";
+        statusP = "status IN ('proses','peminjaman ditolak','peminjaman diterima','pengembalian diterima')";
         statusData="pengembalian diterima";
     }//GEN-LAST:event_btnHistoryPengembalianActionPerformed
 
@@ -917,6 +919,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         user.setId(idAkun);
         user.setNama(namaAkun);
         user.setUsername(usernameAkun);
+        this.dispose();
         new Layout_Ganti(user).setVisible(true);
     }//GEN-LAST:event_btnGantiActionPerformed
 
@@ -926,7 +929,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         querySelect = "SELECT * FROM data_peminjaman WHERE status='proses' GROUP BY kode_peminjaman;";
         loadList(querySelect);
         tampilList();
-        statusP = "status='proses'";
+        statusP = "status IN ('proses','peminjaman ditolak','peminjaman diterima','pengembalian diterima')";
     }//GEN-LAST:event_btnProsesPeminjamActionPerformed
 
     private void btnEditDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDataActionPerformed
@@ -972,7 +975,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         String nama = (String) modelObjek.getValueAt(barisAktif, 1).toString();
         String jumlahTersedia = (String) modelObjek.getValueAt(barisAktif, 2).toString();
         String total = (String) modelObjek.getValueAt(barisAktif, 3).toString();
-        
+        lblID.setVisible(true);
        lblID.setText(id);
         tfENamaBarang.setText(nama);
        tfETotalJumlah.setText(total);
@@ -987,6 +990,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private void btnETambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnETambahActionPerformed
         // TODO add your handling code here:
         resetObjek();
+        lblID.setVisible(false);
         jLabel1.setText("Tambah Data");
         tfENamaBarang.requestFocus();
         btnESubmint.setText("Tambah");
@@ -1001,28 +1005,55 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_tfETotalJumlahActionPerformed
 
     private void btnESubmintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnESubmintActionPerformed
-        // TODO add your handling code here:
-        int total = Integer.parseInt(tfETotalJumlah.getText());
-        int tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
-             
-        if (!lblID.getText().equals("")){  
-        if (total >= tersedia && tersedia <= total){
-                    updateData();
-                    loadObjek();
-                    tampilObjek();
-                    resetObjek();
-                   
+        // TODO add your handling code here:   
+        if (!lblID.getText().equals("")){
+         try {
+            int total = Integer.parseInt(tfETotalJumlah.getText());
+            int tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
+            
+             for (int i = 0; i < listObjek.size(); i++) {
+                 int pinjam = listObjek.get(i).getTotalJumlah() - listObjek.get(i).getJumlahTersedia();
+                 if (lblID.getText().equals(listObjek.get(i).getId()+"")){
+                     if (total >= pinjam && tersedia <= total && (total-tersedia) >= pinjam){              
+                        updateData();
+                        loadObjek();
+                        tampilObjek();
+                        resetObjek();
+                        break;
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Jumlah Tersedia Lebih Kecil Dari Total \n Atau Sebaliknya!");
                 }
+                 }
+                 
+             }
+        
+               }
+             catch (Exception ex) {
+               JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");         
+            }   
           
         }
         else {
+             try {
+            int total = Integer.parseInt(tfETotalJumlah.getText());
+            int tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
+        if (total >= tersedia && tersedia <= total){
+            
+                
                     updateData();
                     loadObjek();
                     tampilObjek();
                     resetObjek();
+               
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Pastikan Jumlah Tersedia Lebih Kecil Dari Total \n Atau Sebaliknya!");
+                }
+               }
+             catch (Exception ex) {
+               JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");         
+            }    
         }
     }//GEN-LAST:event_btnESubmintActionPerformed
 
@@ -1048,6 +1079,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         querySelect = "SELECT * FROM data_peminjaman GROUP BY kode_peminjaman;";
         loadList(querySelect);       
         tampilListByBulan(idBulan);
+        statusP = "status IN ('proses','peminjaman ditolak','peminjaman diterima','pengembalian diterima')";
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

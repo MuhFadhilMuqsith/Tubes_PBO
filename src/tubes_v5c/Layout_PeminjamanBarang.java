@@ -202,6 +202,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
         tfBatasPengembalian.setEditable(false);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Peminjaman Barang");
 
         mainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -455,12 +456,12 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(tfJumlahPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnTambah, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -548,10 +549,12 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
             try {
                 String namaBarang = tfNamaBarang.getText();
                 int jumlahBarang = Integer.parseInt(tfJumlahPeminjaman.getText());
+                String barangada[] = null;
                 
                 
                         
                 for (int i=0;i<listObjek.size();i++){
+        
                     if (namaBarang.equals(listObjek.get(i).getNamaObjek()) && jumlahBarang <= listObjek.get(i).getJumlahTersedia()){
                         cek = true;
                         break;
@@ -560,6 +563,17 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                         cek = false; 
                     }
                 }
+                
+                for (int i = 0; i < modelPinjam.getRowCount(); i++) {
+                    if(btnTambah.getText().equals("Tambah")){
+                        if (namaBarang.equals(modelPinjam.getValueAt(i, 1))){
+                            cek = false;
+                            JOptionPane.showMessageDialog(this,"Barang Sudah DiTambahkan !");
+                            break;
+                        }
+                    }  
+                }
+                
                 if (cek == true){
                     if(btnTambah.getText().equals("Tambah")){
                     modelPinjam.addRow(new Object[] {idBarangpinjam,namaBarang,jumlahBarang});
@@ -571,6 +585,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                 }
                 else {
                     JOptionPane.showMessageDialog(this,"Pastikan Nama Barang dan Jumlah Pinjaman");
+                    btnTambah.setText("Tambah");
                 }
                 resetBarang();
             }
@@ -600,7 +615,8 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
             String tAwal = dtf.format(tanggalAwal);
             String tAkhir = dtf.format(tanggalAkhir);
             String kodePinjam = new Peminjaman().generateRandomString();
-             
+            
+            if (!(namaPeminjam.equals("") || namaOrganisasi.equals("") || namaKegiatan.equals(""))){
   
                 if (tanggalAkhir.compareTo(tanggalAwal) >= 0){
                     for (int i=0;i<modelPinjam.getRowCount();i++){
@@ -617,14 +633,22 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
                    JOptionPane.showMessageDialog(this,"Pastikan Tanggal Peminjaman Awal dan Akhir"); 
                 }
             }
+            else {
+                JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");
+            }
+            }
+        
             catch (Exception e){
                 JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong !");
                  Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, e);
             }
+            
         }
+        
         else {
                  JOptionPane.showMessageDialog(this,"Anda Belum Menambahkan Barang Pinjaman !");
-            }   
+            }
+        
     }//GEN-LAST:event_btnProsesActionPerformed
 
     private void btnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHapusActionPerformed
