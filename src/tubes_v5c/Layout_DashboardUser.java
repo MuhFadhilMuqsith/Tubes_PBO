@@ -10,10 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static tubes_v5c.Peminjaman.byDate;
 
 /**
  *
@@ -95,6 +97,7 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
     
     private void tampilList(){
         model.setRowCount(0);
+        Collections.sort(listPeminjaman , byDate.reversed());
         for(int i = 0;i<model.getRowCount();i++){
             model.removeRow(i);
         }
@@ -107,6 +110,7 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
     
     private void tampilListPinjam(String statusData){
         model.setRowCount(0);
+        Collections.sort(listPeminjaman , byDate.reversed());
         for(int i = 0;i<model.getRowCount();i++){
             model.removeRow(i);
         }
@@ -182,6 +186,8 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
         btnHistoryPeminjaman = new javax.swing.JButton();
         btnHistoryPengembalian = new javax.swing.JButton();
         btnProsesPinjam = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        lblJTOT = new javax.swing.JLabel();
         lbNama = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -399,17 +405,22 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Jumlah Total :");
+
         javax.swing.GroupLayout panelViewLayout = new javax.swing.GroupLayout(panelView);
         panelView.setLayout(panelViewLayout);
         panelViewLayout.setHorizontalGroup(
             panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelViewLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(260, 260, 260))
             .addGroup(panelViewLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelViewLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(260, 260, 260))
                     .addGroup(panelViewLayout.createSequentialGroup()
                         .addGroup(panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 678, Short.MAX_VALUE)
@@ -455,7 +466,13 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelViewLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addGroup(panelViewLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))))
                 .addGap(56, 56, 56))
         );
 
@@ -763,11 +780,13 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbNama;
     private javax.swing.JLabel lbTampil;
+    private javax.swing.JLabel lblJTOT;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel panelTambah;
     private javax.swing.JPanel panelView;

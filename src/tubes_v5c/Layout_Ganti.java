@@ -37,8 +37,8 @@ public class Layout_Ganti extends javax.swing.JFrame {
     public Layout_Ganti(User user) {
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
-        this.setLocationRelativeTo(null);
         initComponents();
+        this.setLocationRelativeTo(null);
         nama = user.getNama();
         username = user.getUsername();
         id = user.getId();
@@ -79,6 +79,7 @@ public class Layout_Ganti extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         psOld = new javax.swing.JPasswordField();
@@ -121,6 +122,15 @@ public class Layout_Ganti extends javax.swing.JFrame {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
+        jButton1.setBackground(new java.awt.Color(255, 255, 255));
+        jButton1.setForeground(new java.awt.Color(51, 153, 255));
+        jButton1.setText("Back");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -134,6 +144,10 @@ public class Layout_Ganti extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(jLabel6))
                 .addGap(94, 94, 94))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -147,7 +161,9 @@ public class Layout_Ganti extends javax.swing.JFrame {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel8))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel2);
@@ -269,6 +285,13 @@ public class Layout_Ganti extends javax.swing.JFrame {
         resetData();
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+        new Layout_Login().setVisible(true);
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -308,6 +331,7 @@ public class Layout_Ganti extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGanti;
     private javax.swing.JButton btnReset;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;

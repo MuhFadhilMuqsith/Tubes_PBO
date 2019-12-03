@@ -90,20 +90,20 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        tfNamaPeminjam = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        tfKodePeminjaman = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        tfNamaOrganisasi = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        tfNamaKegiatan = new javax.swing.JTextField();
-        tfTanggalPeminjaman = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        tfTanggalPengembalian = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         taCatatan = new javax.swing.JTextArea();
+        tfKodePeminjaman = new javax.swing.JLabel();
+        tfNamaPeminjam = new javax.swing.JLabel();
+        tfNamaOrganisasi = new javax.swing.JLabel();
+        tfNamaKegiatan = new javax.swing.JLabel();
+        tfTanggalPeminjaman = new javax.swing.JLabel();
+        tfTanggalPengembalian = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblListPeminjaman = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
@@ -123,27 +123,17 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Nama Peminjam :");
 
-        tfNamaPeminjam.setEditable(false);
-
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Kode Peminjaman :");
-
-        tfKodePeminjaman.setEditable(false);
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Nama Organisasi :");
 
-        tfNamaOrganisasi.setEditable(false);
-
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Nama Kegiatan :");
-
-        tfNamaKegiatan.setEditable(false);
-
-        tfTanggalPeminjaman.setEditable(false);
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
@@ -153,8 +143,6 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Tanggal Pengembalian :");
 
-        tfTanggalPengembalian.setEditable(false);
-
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Catatan");
@@ -163,6 +151,18 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
         taCatatan.setColumns(20);
         taCatatan.setRows(5);
         jScrollPane2.setViewportView(taCatatan);
+
+        tfKodePeminjaman.setForeground(new java.awt.Color(255, 255, 255));
+
+        tfNamaPeminjam.setForeground(new java.awt.Color(255, 255, 255));
+
+        tfNamaOrganisasi.setForeground(new java.awt.Color(255, 255, 255));
+
+        tfNamaKegiatan.setForeground(new java.awt.Color(255, 255, 255));
+
+        tfTanggalPeminjaman.setForeground(new java.awt.Color(255, 255, 255));
+
+        tfTanggalPengembalian.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -203,35 +203,36 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(42, 42, 42)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel3)
-                    .addComponent(tfKodePeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(tfNamaPeminjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(tfNamaOrganisasi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(tfNamaKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(tfTanggalPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(tfTanggalPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                    .addComponent(tfKodePeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(tfNamaPeminjam, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tfNamaOrganisasi, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel5)
+                            .addComponent(tfNamaKegiatan, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel6)
+                            .addComponent(tfTanggalPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7))
+                    .addComponent(tfTanggalPengembalian, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
@@ -285,10 +286,10 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -363,11 +364,11 @@ public class Layout_DetailPeminjamanUser extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea taCatatan;
     private javax.swing.JTable tblListPeminjaman;
-    private javax.swing.JTextField tfKodePeminjaman;
-    private javax.swing.JTextField tfNamaKegiatan;
-    private javax.swing.JTextField tfNamaOrganisasi;
-    private javax.swing.JTextField tfNamaPeminjam;
-    private javax.swing.JTextField tfTanggalPeminjaman;
-    private javax.swing.JTextField tfTanggalPengembalian;
+    private javax.swing.JLabel tfKodePeminjaman;
+    private javax.swing.JLabel tfNamaKegiatan;
+    private javax.swing.JLabel tfNamaOrganisasi;
+    private javax.swing.JLabel tfNamaPeminjam;
+    private javax.swing.JLabel tfTanggalPeminjaman;
+    private javax.swing.JLabel tfTanggalPengembalian;
     // End of variables declaration//GEN-END:variables
 }

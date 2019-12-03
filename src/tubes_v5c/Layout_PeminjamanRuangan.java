@@ -31,7 +31,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
     private Connection conn;
     private ArrayList<ObjekPinjam> listObjek;
-    private ArrayList<DataPeminjamanBarang> listPeminjaman = new ArrayList<>();
+    private ArrayList<Peminjaman> listPeminjaman = new ArrayList<>();
      
     private String nama;
     private String username;
@@ -377,7 +377,7 @@ public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
                         int idBarang = (Integer) modelPinjam.getValueAt(barisAktif,0);
                         int jumlahBarang = listObjek.get(barisAktif).getJumlahTersedia();
                         int idAkun = Integer.parseInt(id);
-                        DataPeminjamanBarang dpb = new DataPeminjamanBarang(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
+                        Peminjaman dpb = new Peminjaman(kodePinjam,"ruangan",namaPeminjam,namaOrganisasi,namaKegiatan,idBarang,jumlahBarang,tAwal,tAkhir,"proses","proses",idAkun);
                         listPeminjaman.add(dpb);
                         insertPeminjaman();
                     }

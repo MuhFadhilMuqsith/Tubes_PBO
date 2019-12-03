@@ -10,10 +10,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import static tubes_v5c.Peminjaman.byDate;
 
 /**
  *
@@ -54,7 +56,6 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         loadObjek();
         tampilObjek();
         tampilList();
-        
     }
     
     private void loadKolom(){
@@ -106,6 +107,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     
     private void tampilList(){
         model.setRowCount(0);
+        Collections.sort(listPeminjaman , byDate.reversed());
         for(int i = 0;i<model.getRowCount();i++){
             model.removeRow(i);
         }
@@ -114,9 +116,11 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian(),pinjam.getStatus()});
             }
         }
+        lblJTOT.setText(model.getRowCount()+"");
     }
     
     private void tampilListPinjam(String statusData){
+        Collections.sort(listPeminjaman , byDate.reversed());
         model.setRowCount(0);
         for(int i = 0;i<model.getRowCount();i++){
             model.removeRow(i);
@@ -126,6 +130,25 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian(),pinjam.getStatus()});
             }
         }
+        lblJTOT.setText(model.getRowCount()+"");
+    }
+    
+    private void tampilListByBulan (int idBulan){
+        Collections.sort(listPeminjaman , byDate.reversed());
+        idBulan = idBulan + 1;
+        model.setRowCount(0);
+        for(int i = 0;i<model.getRowCount();i++){
+            model.removeRow(i);
+        }
+        int bulan = 0;
+        for (Peminjaman pinjam : listPeminjaman){
+            bulan = Integer.parseInt(pinjam.getTanggalPeminjaman().substring(5, 7));
+            if (bulan == idBulan ){
+                model.addRow(new Object[]{pinjam.getKodePeminjaman(),pinjam.getNamaPeminjam(),pinjam.getNamaOrganisasi(),pinjam.getTanggalPeminjaman(),pinjam.getTanggalPengembalian(),pinjam.getStatus()});
+            }
+        }
+        lblJTOT.setText(model.getRowCount()+"");
+        
     }
     
     
@@ -285,6 +308,10 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         btnHistoryPengembalian = new javax.swing.JButton();
         btnHistoryPeminjaman = new javax.swing.JButton();
         btnProsesPeminjam = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        lblJTOT = new javax.swing.JLabel();
+        mcBulan = new com.toedter.calendar.JMonthChooser();
+        jButton1 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblObjekPinjaman = new javax.swing.JTable();
@@ -455,22 +482,44 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        jLabel7.setText("Jumlah Total :");
+
+        mcBulan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mcBulanMouseClicked(evt);
+            }
+        });
+        mcBulan.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                mcBulanInputMethodTextChanged(evt);
+            }
+        });
+        mcBulan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                mcBulanPropertyChange(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(51, 153, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Tampilkan Data Bulanan");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
-                        .addComponent(lbTampil)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -482,12 +531,26 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnHistoryPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(lbTampil)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(mcBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(296, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(244, 244, 244))
+                .addGap(263, 263, 263))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -496,21 +559,28 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCariKode)
                     .addComponent(tfCariKode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(3, 3, 3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(lbTampil)
-                    .addComponent(cbStatus, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE)
-                    .addComponent(cbSort, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 21, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(cbStatus, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(cbSort, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lbTampil, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(mcBulan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnHistoryPeminjaman, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnProsesPeminjam, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7)
+                        .addComponent(lblJTOT, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1))
+                .addGap(8, 8, 8)
                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addGap(20, 20, 20))
         );
 
         jPanel2.add(jPanel3, "card2");
@@ -581,7 +651,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
-        btnESubmint.setText("Submit");
+        btnESubmint.setText("Edit");
         btnESubmint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnESubmintActionPerformed(evt);
@@ -607,7 +677,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -621,14 +691,13 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(btnEReset)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnESubmint))
+                                .addComponent(btnESubmint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel6)
-                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(cbObjek, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(tfEJumlahTersedia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
+                            .addComponent(cbObjek, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(tfEJumlahTersedia)))
                     .addComponent(btnETambah, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbJenisObjekPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -894,6 +963,10 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
 
     private void tblObjekPinjamanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblObjekPinjamanMouseClicked
         // TODO add your handling code here:
+        jLabel1.setText("Edit Data");
+        tfENamaBarang.requestFocus();
+        btnESubmint.setText("Edit");
+        
         int barisAktif = tblObjekPinjaman.getSelectedRow();
         String id = (String) modelObjek.getValueAt(barisAktif, 0).toString();
         String nama = (String) modelObjek.getValueAt(barisAktif, 1).toString();
@@ -914,7 +987,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private void btnETambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnETambahActionPerformed
         // TODO add your handling code here:
         resetObjek();
+        jLabel1.setText("Tambah Data");
         tfENamaBarang.requestFocus();
+        btnESubmint.setText("Tambah");
     }//GEN-LAST:event_btnETambahActionPerformed
 
     private void cbObjekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObjekActionPerformed
@@ -927,11 +1002,47 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
 
     private void btnESubmintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnESubmintActionPerformed
         // TODO add your handling code here:
-        updateData();
-        loadObjek();
-        tampilObjek();
-        resetObjek();
+        int total = Integer.parseInt(tfETotalJumlah.getText());
+        int tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
+        int id = Integer.parseInt(lblID.getText());
+             
+             if (total >= tersedia && tersedia <= total){
+                    updateData();
+                    loadObjek();
+                    tampilObjek();
+                    resetObjek();
+                   
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Pastikan Jumlah Tersedia Lebih Kecil Dari Total \n Atau Sebaliknya!");
+                }
+          
+
     }//GEN-LAST:event_btnESubmintActionPerformed
+
+    private void mcBulanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mcBulanMouseClicked
+        // TODO add your handling code here:
+        //lblJTOT.setText(mcBulan.getMonth()+"");
+    }//GEN-LAST:event_mcBulanMouseClicked
+
+    private void mcBulanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_mcBulanPropertyChange
+        // TODO add your handling code here:
+         
+    }//GEN-LAST:event_mcBulanPropertyChange
+
+    private void mcBulanInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_mcBulanInputMethodTextChanged
+        // TODO add your handling code here:
+       // int idBulan = mcBulan.getMonth();
+         //tampilListByBulan(idBulan);
+    }//GEN-LAST:event_mcBulanInputMethodTextChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int idBulan = mcBulan.getMonth();
+        querySelect = "SELECT * FROM data_peminjaman GROUP BY kode_peminjaman;";
+        loadList(querySelect);       
+        tampilListByBulan(idBulan);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -984,6 +1095,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cbObjek;
     private javax.swing.JComboBox<String> cbSort;
     private javax.swing.JComboBox<String> cbStatus;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -991,6 +1103,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -999,7 +1112,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbTampil;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblJTOT;
     private javax.swing.JPanel mainPanel;
+    private com.toedter.calendar.JMonthChooser mcBulan;
     private javax.swing.JTable tblListPeminjaman;
     private javax.swing.JTable tblObjekPinjaman;
     private javax.swing.JTextField tfCariKode;

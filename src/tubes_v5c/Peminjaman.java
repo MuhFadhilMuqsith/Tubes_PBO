@@ -6,6 +6,7 @@
 package tubes_v5c;
 
 import java.security.SecureRandom;
+import java.util.Comparator;
 
 /**
  *
@@ -24,13 +25,16 @@ public class Peminjaman {
     private String status;
     private String catatan;
     private int idUser;
-    
+
     private static final String CHAR_LOWER = "abcdefghijklmnopqrstuvwxyz";
     private static final String CHAR_UPPER = CHAR_LOWER.toUpperCase();
     private static final String NUMBER = "0123456789";
 
     private static final String DATA_FOR_RANDOM_STRING = CHAR_LOWER + CHAR_UPPER + NUMBER;
     private static SecureRandom random = new SecureRandom();
+    
+    
+    public static final Comparator<Peminjaman> byDate = new orderByDate();
 
     public Peminjaman(String kodePeminjaman, String jenisPeminjaman, String namaPeminjam, String namaOrganisasi, String namaKegiatan, int idObjek, int jumlahBarang, String tanggalPeminjaman, String tanggalPengembalian, String status, String catatan, int idUser) {
         this.kodePeminjaman = kodePeminjaman;
@@ -167,6 +171,13 @@ public class Peminjaman {
 
         return sb.toString();
 
+    }
+
+    private static class orderByDate implements Comparator<Peminjaman> {
+    @Override
+        public int compare(Peminjaman o1, Peminjaman o2) {
+           return o1.getTanggalPeminjaman().compareTo(o2.getTanggalPeminjaman());
+        }
     }
 
 }
