@@ -25,11 +25,8 @@ public class Layout_Ganti extends javax.swing.JFrame {
     private String username;
     private String id;
     
-    private String oldPass=null;
-    private String newPass=null;
-    private String confirmPass=null;
-    private ArrayList<User> password;
-    private ArrayList<User> gantiPass = new ArrayList<>();
+
+
     
     /**
      * Creates new form NewJFrame
@@ -44,19 +41,49 @@ public class Layout_Ganti extends javax.swing.JFrame {
         id = user.getId();
     }
     
-     public void GantiPassword(String newPass,String oldPass){
-         if (conn != null){
-            try{
-                int hasil = 0;
-                String query = "UPDATE user SET password ='"+newPass+"' WHERE password='"+oldPass+"' AND username = '"+username+"'";
+     
+     private void gantiPass(String newPass,String oldPass){
+            User user = new User();
+            String usernameAkun = "";
+            String passwordAkun = "";
+            String namaAkun = "";
+            String idAkun ="";
+            String status = "";
+            String query = "SELECT * FROM user WHERE username = '"+username+"';";
+            try {
                 PreparedStatement ps = conn.prepareStatement(query);
-                hasil = ps.executeUpdate();
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    usernameAkun = rs.getString("username");
+                    passwordAkun = rs.getString("password");
+                    namaAkun = rs.getString("nama");
+                    idAkun = rs.getString("id");
+                    status = rs.getString("status");
+                    
+                }
+                rs.close();
+                ps.close();
+                
+                if (user.enkripsiPassword(String.valueOf(psOld.getPassword())).equals(passwordAkun) ){
+                    int hasil = 0;
+                    String query2 = "UPDATE user SET password ='"+newPass+"' WHERE password='"+oldPass+"' AND username = '"+username+"'";
+                    PreparedStatement ps2 = conn.prepareStatement(query2);
+                    hasil = ps2.executeUpdate();
+                    if (hasil > 0){
+                        JOptionPane.showMessageDialog(this,"Ganti Password Barhasil !");
+                        new Layout_Login().setVisible(true);
+                        this.dispose();
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Password Salah");
+                    resetData();
+                }
             }
-            catch(SQLException ex){
-                 Logger.getLogger(User.class.getName()).log(Level.SEVERE, null, ex);
-                 JOptionPane.showMessageDialog(this,"Password tidak cocok");
+            catch (SQLException ex){
+                Logger.getLogger(Layout_Login.class.getName()).log(Level.SEVERE, null, ex);
             }
-         }
+         
      }
      private void resetData(){  
         psOld.setText("");
@@ -269,11 +296,12 @@ public class Layout_Ganti extends javax.swing.JFrame {
        String newPass = User.enkripsiPassword(String.valueOf(psNew.getPassword()));
        String confirmPass=User.enkripsiPassword(String.valueOf(psConfirm.getPassword()));
         if(!(oldPass.equals("") || newPass.equals("")|| confirmPass.equals(""))){
-             GantiPassword(newPass,oldPass);
-             JOptionPane.showMessageDialog(this,"Password berhasil diganti");
-             new Layout_Login().setVisible(true);
-             this.dispose();
-             
+            if (newPass.equals(confirmPass)){
+             gantiPass(newPass,oldPass);
+            }
+            else {
+                JOptionPane.showMessageDialog(this,"Password Baru den Konfirmasi Password Tidak Sama");
+            }
         }
         else {
             JOptionPane.showMessageDialog(this,"Pastikan Semua Data Terisi!");

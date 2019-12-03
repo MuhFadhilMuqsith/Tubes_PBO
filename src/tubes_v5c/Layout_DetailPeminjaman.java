@@ -20,7 +20,11 @@ import javax.swing.table.DefaultTableModel;
  * @author _MFMq_PC
  */
 public class Layout_DetailPeminjaman extends javax.swing.JFrame {
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel model = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
     private Connection conn;
     private ArrayList<Peminjaman> listPeminjaman;
 

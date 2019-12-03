@@ -27,7 +27,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Layout_PeminjamanRuangan extends javax.swing.JFrame {
     
-    private DefaultTableModel modelPinjam = new DefaultTableModel();
+    private DefaultTableModel modelPinjam = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
     private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
     private Connection conn;
     private ArrayList<ObjekPinjam> listObjek;

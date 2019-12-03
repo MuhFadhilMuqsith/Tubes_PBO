@@ -27,7 +27,11 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
     private String username;
     private String id;
     
-    private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel model = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
     private ArrayList<Peminjaman> listPeminjaman;
     private String querySelect;
     private String statusP = "status='proses'";

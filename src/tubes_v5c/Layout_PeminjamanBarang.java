@@ -26,8 +26,16 @@ import javax.swing.table.DefaultTableModel;
  * @author _MFMq_PC
  */
 public class Layout_PeminjamanBarang extends javax.swing.JFrame {
-    private DefaultTableModel modelList = new DefaultTableModel();
-    private DefaultTableModel modelPinjam = new DefaultTableModel();
+    private DefaultTableModel modelList = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
+    private DefaultTableModel modelPinjam = new DefaultTableModel(){
+      public boolean isCellEditable(int rowIndex, int mColIndex) {
+        return false;
+      }
+    };
     private SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd");
     private Connection conn;
     private ArrayList<ObjekPinjam> listObjek;
@@ -60,6 +68,7 @@ public class Layout_PeminjamanBarang extends javax.swing.JFrame {
         nama = user.getNama();
         username = user.getUsername();
         id = user.getId();
+
         
         
     }
