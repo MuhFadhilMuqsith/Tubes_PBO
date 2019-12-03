@@ -693,6 +693,7 @@ public class Layout_DashboardUser extends javax.swing.JFrame {
         user.setUsername(username);
         user.setId(id);
         user.setNama(nama);
+        this.dispose();
         new Layout_Ganti(user).setVisible(true);
     }//GEN-LAST:event_btnGantiActionPerformed
 

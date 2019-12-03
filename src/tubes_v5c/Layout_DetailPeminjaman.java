@@ -108,7 +108,8 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                     if (hasilUp > 0 && hasil > 0){
                            JOptionPane.showMessageDialog(this,"Peminjaman Telah Dikonfirmasi !");
                             this.dispose();
-                            new Layout_DashboardAdmin().setVisible(true);
+                            User user = new User();
+                            new Layout_DashboardAdmin(user).setVisible(true);
                     }
                     else {
                         JOptionPane.showMessageDialog(this,"Gagal !");
@@ -123,7 +124,8 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
                     if (hasilUp > 0 && hasil > 0){
                            JOptionPane.showMessageDialog(this,"Pengembalian Telah Dikonfirmasi !");
                             this.dispose();
-                            new Layout_DashboardAdmin().setVisible(true);
+                            User user = new User();
+                            new Layout_DashboardAdmin(user).setVisible(true);
                     }
                     else {
                         JOptionPane.showMessageDialog(this,"Gagal !");
@@ -441,7 +443,8 @@ public class Layout_DetailPeminjaman extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         this.dispose();
-        new Layout_DashboardAdmin().setVisible(true);
+        User user = new User();
+        new Layout_DashboardAdmin(user).setVisible(true);
         
     }//GEN-LAST:event_btnBackActionPerformed
 

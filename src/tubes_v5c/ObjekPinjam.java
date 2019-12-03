@@ -14,6 +14,15 @@ public class ObjekPinjam {
     private String namaObjek;
     private int jumlahTersedia;
     private int totalJumlah;
+    private String jenisObjek;
+
+    public String getJenisObjek() {
+        return jenisObjek;
+    }
+
+    public void setJenisObjek(String jenisObjek) {
+        this.jenisObjek = jenisObjek;
+    }
 
 
     public ObjekPinjam(int id, String namaObjek, int jumlahTersedia, int totalJumlah) {
@@ -22,6 +31,16 @@ public class ObjekPinjam {
         this.jumlahTersedia = jumlahTersedia;
         this.totalJumlah = totalJumlah;
     }
+
+    public ObjekPinjam(int id, String namaObjek, int jumlahTersedia, int totalJumlah, String jenisObjek) {
+        this.id = id;
+        this.namaObjek = namaObjek;
+        this.jumlahTersedia = jumlahTersedia;
+        this.totalJumlah = totalJumlah;
+        this.jenisObjek = jenisObjek;
+    }
+    
+    
 
     public int getId() {
         return id;

@@ -21,25 +21,38 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private DefaultTableModel model = new DefaultTableModel();
+    private DefaultTableModel modelObjek = new DefaultTableModel();
     private Connection conn;
     private ArrayList<Peminjaman> listPeminjaman;
+    private ArrayList<ObjekPinjam> listObjek;
     private String querySelect;
     private String statusP = "status='proses'";
     private String statusData = "peminjaman diterima";
+    
+     private String namaAkun;
+    private String usernameAkun;
+    private String idAkun;
 
     /**
      * Creates new form Layout_DashboardAdmin
      */
-    public Layout_DashboardAdmin() {
+    public Layout_DashboardAdmin(User user) {
         initComponents();
+        namaAkun = user.getNama();
+        usernameAkun = user.getUsername();
+        idAkun = user.getId();
         this.setLocationRelativeTo(null);
         cbStatus.setVisible(false);
         tblListPeminjaman.setModel(model);
+        tblObjekPinjaman.setModel(modelObjek);
         loadKolom();
+        loadKolomObjek();
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
         querySelect = "SELECT * FROM data_peminjaman GROUP BY kode_peminjaman;";
         loadList(querySelect);
+        loadObjek();
+        tampilObjek();
         tampilList();
         
     }
@@ -51,6 +64,13 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         model.addColumn("Tanggal Peminjaman");
         model.addColumn("Tanggal Pengembalian");
         model.addColumn("Status");
+    }
+    
+    private void loadKolomObjek(){
+        modelObjek.addColumn("Id");
+        modelObjek.addColumn("Nama");
+        modelObjek.addColumn("Jumlah Tersedia");
+        modelObjek.addColumn("Total Jumlah");
     }
     
     private void loadList(String querySelect){
@@ -109,6 +129,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     }
     
     
+    
+    
     private void cariData(String statusPinjam,String keyword){
         if (conn != null){
             listPeminjaman = new ArrayList<>();
@@ -140,6 +162,100 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         }
     }
+    
+    private void loadObjek(){
+        if (conn != null){
+            listObjek = new ArrayList<>();
+            String query = "SELECT id_objek,nama_objek,jumlah_tersedia,total_jumlah,jenis_objek FROM objek_pinjam ;";
+            try {
+                PreparedStatement ps = conn.prepareStatement(query);
+                ResultSet rs = ps.executeQuery();
+                while(rs.next()){
+                    int id = rs.getInt("id_objek");
+                    String namaBarang = rs.getString("nama_objek");
+                    int jumlah_tersedia = rs.getInt("jumlah_tersedia");
+                    int total = rs.getInt("total_jumlah");
+                    String jenisObjek = rs.getString("jenis_objek");
+                    ObjekPinjam objek = new ObjekPinjam(id,namaBarang,jumlah_tersedia,total,jenisObjek);
+                    listObjek.add(objek);
+                }
+                rs.close();
+                ps.close();
+            }
+            catch (SQLException ex){
+                Logger.getLogger(Layout_PeminjamanBarang.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    
+    private void tampilObjek(){
+        modelObjek.setRowCount(0);
+        for(int i = 0;i<modelObjek.getRowCount();i++){
+            modelObjek.removeRow(i);
+        }
+        for (ObjekPinjam objekPinjam : listObjek){
+            if (cbJenisObjekPinjam.getSelectedItem().equals(objekPinjam.getJenisObjek())){
+                modelObjek.addRow(new Object[]{objekPinjam.getId(),objekPinjam.getNamaObjek(),objekPinjam.getJumlahTersedia(),objekPinjam.getTotalJumlah()});           
+            }
+        }
+    }
+    
+    private void resetObjek(){
+        lblID.setText("");
+        tfEJumlahTersedia.setText("");
+        tfENamaBarang.setText("");
+        tfETotalJumlah.setText("");
+    }
+    
+    private void updateData(){
+        if (lblID.getText().equals("")){
+            try{
+                if (!(tfENamaBarang.getText().equals("") || tfETotalJumlah.getText().equals("") || tfEJumlahTersedia.getText().equals("") )){
+                    String query = "INSERT INTO objek_pinjam (nama_objek,jenis_objek,jumlah_tersedia,total_jumlah) VALUES (?,?,?,?)";
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    ps.setString(1,tfENamaBarang.getText());
+                    ps.setString(2,cbObjek.getSelectedItem().toString());
+                    ps.setString(3,tfEJumlahTersedia.getText());
+                    ps.setString(4,tfETotalJumlah.getText());
+                    int hasil = ps.executeUpdate();
+                    if (hasil > 0){
+                        JOptionPane.showMessageDialog(this,"Data Berhasil Ditambahkan !");
+
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Layout_DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        else {
+            try{
+                if (!(tfENamaBarang.getText().equals("") || tfETotalJumlah.getText().equals("") || tfEJumlahTersedia.getText().equals("") )){
+                    int id = Integer.parseInt(lblID.getText());
+                    String namaBarang = tfENamaBarang.getText();
+                    int jumlah_tersedia = Integer.parseInt(tfEJumlahTersedia.getText());
+                    int total = Integer.parseInt(tfETotalJumlah.getText());
+                    String jenisObjek = cbObjek.getSelectedItem().toString();
+                    String query = "UPDATE objek_pinjam SET nama_objek = '"+namaBarang+"' , jenis_objek = '"+jenisObjek+"' , jumlah_tersedia = "+jumlah_tersedia+" , total_jumlah = "+total+" WHERE id_objek = "+id+" ;";
+                   
+                    PreparedStatement ps = conn.prepareStatement(query);
+                    
+                    int hasil = ps.executeUpdate();
+                    if (hasil > 0){
+                        JOptionPane.showMessageDialog(this,"Data Berhasil DiUpdate !");
+                        
+                    }
+                }
+                else {
+                    JOptionPane.showMessageDialog(this,"Form Tidak Boleh Kosong");
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(Layout_DashboardAdmin.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,6 +271,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         btnPermohonan = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         btnGanti = new javax.swing.JButton();
+        btnEditData = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -168,6 +285,24 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         btnHistoryPengembalian = new javax.swing.JButton();
         btnHistoryPeminjaman = new javax.swing.JButton();
         btnProsesPeminjam = new javax.swing.JButton();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblObjekPinjaman = new javax.swing.JTable();
+        cbJenisObjekPinjam = new javax.swing.JComboBox<>();
+        btnETambah = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        tfENamaBarang = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        tfETotalJumlah = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tfEJumlahTersedia = new javax.swing.JTextField();
+        btnEReset = new javax.swing.JButton();
+        btnESubmint = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        cbObjek = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +339,15 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             }
         });
 
+        btnEditData.setBackground(new java.awt.Color(255, 255, 255));
+        btnEditData.setForeground(new java.awt.Color(51, 153, 255));
+        btnEditData.setText("Edit Data Barang");
+        btnEditData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditDataActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -213,7 +357,8 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnPermohonan, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGanti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnGanti, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEditData, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -221,7 +366,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
                 .addComponent(btnPermohonan, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 292, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditData, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addComponent(btnGanti, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,6 +376,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new java.awt.CardLayout());
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -321,7 +469,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                         .addGap(10, 10, 10)
                         .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 669, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -337,7 +485,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                                 .addComponent(btnHistoryPengembalian, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(292, Short.MAX_VALUE)
+                .addContainerGap(296, Short.MAX_VALUE)
                 .addComponent(btnDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(244, 244, 244))
         );
@@ -365,20 +513,168 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
                 .addGap(43, 43, 43))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+        jPanel2.add(jPanel3, "card2");
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblObjekPinjaman.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tblObjekPinjaman.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblObjekPinjamanMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblObjekPinjaman);
+
+        cbJenisObjekPinjam.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "barang", "ruangan" }));
+        cbJenisObjekPinjam.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbJenisObjekPinjamActionPerformed(evt);
+            }
+        });
+
+        btnETambah.setText("Tambah");
+        btnETambah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnETambahActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel1.setText("Edit Data");
+
+        jLabel2.setText("ID :");
+
+        jLabel3.setText("Nama");
+
+        jLabel4.setText("Total Jumlah");
+
+        tfETotalJumlah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfETotalJumlahActionPerformed(evt);
+            }
+        });
+        tfETotalJumlah.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfETotalJumlahKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfETotalJumlahKeyTyped(evt);
+            }
+        });
+
+        jLabel5.setText("Jumlah Tersedia");
+
+        btnEReset.setText("Reset");
+        btnEReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEResetActionPerformed(evt);
+            }
+        });
+
+        btnESubmint.setText("Submit");
+        btnESubmint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnESubmintActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Jenis Objek");
+
+        cbObjek.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "barang", "ruangan" }));
+        cbObjek.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbObjekActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3)
+                            .addComponent(tfENamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4)
+                            .addComponent(tfETotalJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnEReset)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnESubmint))
+                            .addComponent(jLabel6)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(cbObjek, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(tfEJumlahTersedia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))))
+                    .addComponent(btnETambah, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbJenisObjekPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(cbJenisObjekPinjam, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addGap(3, 3, 3)
+                        .addComponent(tfENamaBarang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(3, 3, 3)
+                        .addComponent(tfETotalJumlah, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addGap(3, 3, 3)
+                        .addComponent(tfEJumlahTersedia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbObjek, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnEReset)
+                            .addComponent(btnESubmint))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnETambah, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(80, Short.MAX_VALUE))
         );
+
+        jPanel2.add(jPanel4, "card3");
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -386,7 +682,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 705, Short.MAX_VALUE))
+                .addGap(0, 709, Short.MAX_VALUE))
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addGap(246, 246, 246)
@@ -395,7 +691,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         );
         mainPanelLayout.setVerticalGroup(
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(mainPanelLayout.createSequentialGroup()
                     .addContainerGap()
@@ -486,6 +782,12 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
 
     private void btnPermohonanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPermohonanActionPerformed
         // TODO add your handling code here:
+        jPanel2.removeAll();
+        jPanel2.repaint();
+        jPanel2.revalidate();
+        jPanel2.add(jPanel3);
+        jPanel2.repaint();
+        jPanel2.revalidate();
         cbStatus.setVisible(false);
         querySelect = "SELECT * FROM data_peminjaman GROUP BY kode_peminjaman;";
         loadList(querySelect);
@@ -543,6 +845,9 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     private void btnGantiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGantiActionPerformed
         // TODO add your handling code here:
         User user = new User();
+        user.setId(idAkun);
+        user.setNama(namaAkun);
+        user.setUsername(usernameAkun);
         new Layout_Ganti(user).setVisible(true);
     }//GEN-LAST:event_btnGantiActionPerformed
 
@@ -554,6 +859,79 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         tampilList();
         statusP = "status='proses'";
     }//GEN-LAST:event_btnProsesPeminjamActionPerformed
+
+    private void btnEditDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditDataActionPerformed
+        // TODO add your handling code here:
+        jPanel2.removeAll();
+        jPanel2.repaint();
+        jPanel2.revalidate();
+        jPanel2.add(jPanel4);
+        jPanel2.repaint();
+        jPanel2.revalidate();
+    }//GEN-LAST:event_btnEditDataActionPerformed
+
+    private void tfETotalJumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfETotalJumlahKeyPressed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfETotalJumlahKeyPressed
+
+    private void tfETotalJumlahKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfETotalJumlahKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_tfETotalJumlahKeyTyped
+
+    private void cbJenisObjekPinjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbJenisObjekPinjamActionPerformed
+        // TODO add your handling code here:
+        if(cbJenisObjekPinjam.getSelectedItem().equals("barang")){
+            cbObjek.setSelectedIndex(0);
+        }
+        else {
+            cbObjek.setSelectedIndex(1);
+        }
+        loadObjek();
+        tampilObjek();
+    }//GEN-LAST:event_cbJenisObjekPinjamActionPerformed
+
+    private void tblObjekPinjamanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblObjekPinjamanMouseClicked
+        // TODO add your handling code here:
+        int barisAktif = tblObjekPinjaman.getSelectedRow();
+        String id = (String) modelObjek.getValueAt(barisAktif, 0).toString();
+        String nama = (String) modelObjek.getValueAt(barisAktif, 1).toString();
+        String jumlahTersedia = (String) modelObjek.getValueAt(barisAktif, 2).toString();
+        String total = (String) modelObjek.getValueAt(barisAktif, 3).toString();
+        
+       lblID.setText(id);
+        tfENamaBarang.setText(nama);
+       tfETotalJumlah.setText(total);
+       tfEJumlahTersedia.setText(jumlahTersedia);
+    }//GEN-LAST:event_tblObjekPinjamanMouseClicked
+
+    private void btnEResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEResetActionPerformed
+        // TODO add your handling code here:
+        resetObjek();
+    }//GEN-LAST:event_btnEResetActionPerformed
+
+    private void btnETambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnETambahActionPerformed
+        // TODO add your handling code here:
+        resetObjek();
+        tfENamaBarang.requestFocus();
+    }//GEN-LAST:event_btnETambahActionPerformed
+
+    private void cbObjekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbObjekActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbObjekActionPerformed
+
+    private void tfETotalJumlahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfETotalJumlahActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfETotalJumlahActionPerformed
+
+    private void btnESubmintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnESubmintActionPerformed
+        // TODO add your handling code here:
+        updateData();
+        loadObjek();
+        tampilObjek();
+        resetObjek();
+    }//GEN-LAST:event_btnESubmintActionPerformed
 
     /**
      * @param args the command line arguments
@@ -585,7 +963,7 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Layout_DashboardAdmin().setVisible(true);
+
             }
         });
     }
@@ -593,21 +971,40 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCariKode;
     private javax.swing.JButton btnDetail;
+    private javax.swing.JButton btnEReset;
+    private javax.swing.JButton btnESubmint;
+    private javax.swing.JButton btnETambah;
+    private javax.swing.JButton btnEditData;
     private javax.swing.JButton btnGanti;
     private javax.swing.JButton btnHistoryPeminjaman;
     private javax.swing.JButton btnHistoryPengembalian;
     private javax.swing.JButton btnPermohonan;
     private javax.swing.JButton btnProsesPeminjam;
+    private javax.swing.JComboBox<String> cbJenisObjekPinjam;
+    private javax.swing.JComboBox<String> cbObjek;
     private javax.swing.JComboBox<String> cbSort;
     private javax.swing.JComboBox<String> cbStatus;
     private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbTampil;
+    private javax.swing.JLabel lblID;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable tblListPeminjaman;
+    private javax.swing.JTable tblObjekPinjaman;
     private javax.swing.JTextField tfCariKode;
+    private javax.swing.JTextField tfEJumlahTersedia;
+    private javax.swing.JTextField tfENamaBarang;
+    private javax.swing.JTextField tfETotalJumlah;
     // End of variables declaration//GEN-END:variables
 }

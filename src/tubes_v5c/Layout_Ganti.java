@@ -37,6 +37,7 @@ public class Layout_Ganti extends javax.swing.JFrame {
     public Layout_Ganti(User user) {
         Koneksi koneksi = new Koneksi();
         conn = koneksi.bukaKoneksi();
+        this.setLocationRelativeTo(null);
         initComponents();
         nama = user.getNama();
         username = user.getUsername();
@@ -253,6 +254,8 @@ public class Layout_Ganti extends javax.swing.JFrame {
         if(!(oldPass.equals("") || newPass.equals("")|| confirmPass.equals(""))){
              GantiPassword(newPass,oldPass);
              JOptionPane.showMessageDialog(this,"Password berhasil diganti");
+             new Layout_Login().setVisible(true);
+             this.dispose();
              
         }
         else {

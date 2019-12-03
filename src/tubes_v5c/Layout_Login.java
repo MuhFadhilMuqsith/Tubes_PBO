@@ -68,7 +68,12 @@ public class Layout_Login extends javax.swing.JFrame {
                         this.dispose();
                     }
                     else {
-                        Layout_DashboardAdmin lda = new Layout_DashboardAdmin();
+                        user.setNama(nama);
+                        user.setId(id);
+                        user.setPassword(password);
+                        user.setUsername(username);
+                        JOptionPane.showMessageDialog(this,"Berhasil Login");
+                        Layout_DashboardAdmin lda = new Layout_DashboardAdmin(user);
                         lda.setVisible(true);
                         this.dispose();
                     }
