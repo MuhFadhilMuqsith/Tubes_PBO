@@ -1,0 +1,1822 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+    a {text-decoration: none}
+  </style>
+</head>
+<body text="#000000" link="#000000" alink="#000000" vlink="#000000">
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="50%">&nbsp;</td><td align="center">
+
+<a name="JR_PAGE_ANCHOR_0_1"></a>
+<table class="jrPage" cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 595px; border-collapse: collapse; background-color: white;">
+<tr valign="top" style="height:0">
+<td style="width:20px"></td>
+<td style="width:100px"></td>
+<td style="width:134px"></td>
+<td style="width:141px"></td>
+<td style="width:140px"></td>
+<td style="width:40px"></td>
+<td style="width:20px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+</tr>
+<tr valign="top" style="height:23px">
+<td style="background-color: #006699; ">
+</td>
+<td colspan="2" rowspan="2" style="background-color: #006699; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #FFFFFF; font-size: 22px; line-height: 1.2578125; font-weight: bold;">Data Peminjaman</span></td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td colspan="2" style="background-color: #006699; text-indent: 0px; text-align: right;">
+<span style="font-family: SansSerif; color: #FFFFFF; font-size: 14px; line-height: 1.2578125;">Lend Of Logistik</span></td>
+<td style="background-color: #006699; ">
+</td>
+</tr>
+<tr valign="top" style="height:29px">
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+<td style="background-color: #006699; ">
+</td>
+</tr>
+<tr valign="top" style="height:33px">
+<td colspan="7">
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="7" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="4" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">KwbGp</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="7" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Fadhil</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MNH</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Seminar Motivasi</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">5</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">5</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="4" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">5WYEi</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="7" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Muqsith</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">HNM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Workshop</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="4" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">4WY2D</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="7" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MFM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MFM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Talkshow</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">5</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-28</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-28</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="4" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">oO5CR</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="7" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">a</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">a</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="4" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">a</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="5">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Kursi</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">3</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:27px">
+<td colspan="7">
+</td>
+</tr>
+<tr valign="top" style="height:13px">
+<td>
+</td>
+<td colspan="4">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:515px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; background-color: #E6E6E6; text-indent: 0px; text-align: right;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Page 1 of</span></td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Wednesday 04 </span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">&nbsp;4</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td colspan="7">
+</td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_2"></a>
+<table class="jrPage" cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 595px; border-collapse: collapse; background-color: white;">
+<tr valign="top" style="height:0">
+<td style="width:20px"></td>
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+<td style="width:40px"></td>
+<td style="width:20px"></td>
+</tr>
+<tr valign="top" style="height:53px">
+<td colspan="5">
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">suw2W</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Restu Ananda</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Cheva Labs</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">WorkShop</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Set Proyektor</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">5TdoZ</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Coba</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Coba</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Coba</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Set Mic</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">le7pI</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MMM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MMM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MMM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Ruang Meeting</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">1</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">zNXDt</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">A</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">A</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">A</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Ruang Aula</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">1</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">wDiSN</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">MFM</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">FADHIL</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">dadjadjka</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Ruang Aula</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">1</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-29</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-10</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:10px">
+<td colspan="5">
+</td>
+</tr>
+<tr valign="top" style="height:13px">
+<td>
+</td>
+<td colspan="2">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:515px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; background-color: #E6E6E6; text-indent: 0px; text-align: right;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Page 2 of</span></td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Wednesday 04 </span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">&nbsp;4</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td colspan="5">
+</td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_3"></a>
+<table class="jrPage" cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 595px; border-collapse: collapse; background-color: white;">
+<tr valign="top" style="height:0">
+<td style="width:20px"></td>
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+<td style="width:40px"></td>
+<td style="width:20px"></td>
+</tr>
+<tr valign="top" style="height:53px">
+<td colspan="5">
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">xloJO</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">dada</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">dasd</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">dasd</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Ruang Meeting</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">1</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">SgAVO</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">gg</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">bh</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">cc</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Set Mic</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">10</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-11-30</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-16</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">r5YpE</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Fadhil Muqsith</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Himadira</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">DiesNatalis</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Set Proyektor</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-04</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-05</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Amplifier Mixer</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-04</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-05</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">x2QX6</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Tesla</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">PLN</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">Uji Coba</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="3">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Amplifier Mixer</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-06</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-13</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Kode &nbsp; &nbsp; Peminjaman</span></td>
+<td colspan="2" style="background-color: #E6E6E6; text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">KFd9H</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="5" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Peminjam</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">eqe</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Organisasi</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">qeqe</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:32px">
+<td>
+</td>
+<td style="text-indent: 0px;  vertical-align: middle;text-align: center;">
+<span style="font-family: SansSerif; color: #666666; font-size: 12px; line-height: 1.2578125;">Nama Kegiatan</span></td>
+<td colspan="2" style="text-indent: 0px;  vertical-align: middle;text-align: left;">
+<span style="font-family: SansSerif; color: #006699; font-size: 14px; line-height: 1.2578125; font-weight: bold;">qeqeq</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:10px">
+<td colspan="5">
+</td>
+</tr>
+<tr valign="top" style="height:13px">
+<td>
+</td>
+<td colspan="2">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:515px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; background-color: #E6E6E6; text-indent: 0px; text-align: right;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Page 3 of</span></td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Wednesday 04 </span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">&nbsp;4</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td colspan="5">
+</td>
+</tr>
+</table>
+<br/>
+<br/>
+
+<a name="JR_PAGE_ANCHOR_0_4"></a>
+<table class="jrPage" cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 595px; border-collapse: collapse; background-color: white;">
+<tr valign="top" style="height:0">
+<td style="width:20px"></td>
+<td style="width:515px"></td>
+<td style="width:40px"></td>
+<td style="width:20px"></td>
+</tr>
+<tr valign="top" style="height:53px">
+<td colspan="4">
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td colspan="4" style="border-top: 1px solid #666666; ">
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td>
+</td>
+<td colspan="2">
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:555px"></td>
+</tr>
+<tr valign="top" style="height:19px">
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:1px">
+<td style="pointer-events: auto; background-color: #FFFFFF; border-top: 1px solid #000000; ">
+</td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:138px"></td>
+<td style="width:3px"></td>
+</tr>
+<tr valign="top" style="height:20px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">Ruang Teater</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">1</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-19</span></td>
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 14px; line-height: 1.2578125;">2019-12-21</span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:735px">
+<td colspan="4">
+</td>
+</tr>
+<tr valign="top" style="height:13px">
+<td>
+</td>
+<td>
+<div style="width: 100%; height: 100%; position: relative;">
+<div style="position: absolute; overflow: hidden; width: 100%; height: 100%; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:515px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; background-color: #E6E6E6; text-indent: 0px; text-align: right;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Page 4 of</span></td>
+</tr>
+</table>
+</div>
+<div style="position: relative; width: 100%; height: 100%; pointer-events: none; ">
+<table cellpadding="0" cellspacing="0" border="0" style="empty-cells: show; width: 100%; border-collapse: collapse;">
+<tr valign="top" style="height:0">
+<td style="width:100px"></td>
+<td style="width:415px"></td>
+</tr>
+<tr valign="top" style="height:13px">
+<td style="pointer-events: auto; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">Wednesday 04 </span></td>
+<td>
+</td>
+</tr>
+</table>
+</div>
+</div>
+</td>
+<td style="background-color: #E6E6E6; text-indent: 0px; text-align: left;">
+<span style="font-family: SansSerif; color: #000000; font-size: 10px; line-height: 1.2578125;">&nbsp;4</span></td>
+<td>
+</td>
+</tr>
+<tr valign="top" style="height:20px">
+<td colspan="4">
+</td>
+</tr>
+</table>
+
+<![if IE]>
+<script>
+var links = document.querySelectorAll('link.jrWebFont');
+setTimeout(function(){ if (links) { for (var i = 0; i < links.length; i++) { links.item(i).href = links.item(i).href; } } }, 0);
+</script>
+<![endif]>
+</td><td width="50%">&nbsp;</td></tr>
+</table>
+</body>
+</html>
