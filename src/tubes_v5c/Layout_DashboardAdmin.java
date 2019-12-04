@@ -9,11 +9,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
@@ -21,6 +23,7 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.view.JasperViewer;
+import org.codehaus.groovy.control.messages.Message;
 import static tubes_v5c.Peminjaman.byDate;
 
 /**
@@ -1112,18 +1115,19 @@ public class Layout_DashboardAdmin extends javax.swing.JFrame {
 
     private void btnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCetakActionPerformed
         // TODO add your handling code here:
-        String reportSource = null;
-        String reportDest = null;
+        //String reportSource = null;
+        //String reportDest = null;
         
         try{
-            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) conn;
-            reportSource = System.getProperty("user.dir") + "/laporan/Laporan Data Peminjaman.jrxml";
-            reportDest = System.getProperty("user.dir") + "/laporan/Laporan Data Peminjaman.jasper";
-            
-            JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
-            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null,c);
-            JasperExportManager.exportReportToHtmlFile(jasperPrint, reportDest);
-            JasperViewer.viewReport(jasperPrint,false);
+            tblListPeminjaman.print(JTable.PrintMode.FIT_WIDTH, new MessageFormat("Laporan Peminjaman"), null);
+//            com.mysql.jdbc.Connection c = (com.mysql.jdbc.Connection) conn;
+//            reportSource = System.getProperty("user.dir") + "/laporan/Laporan Data Peminjaman.jrxml";
+//            reportDest = System.getProperty("user.dir") + "/laporan/Laporan Data Peminjaman.jasper";
+//            
+//            JasperReport jasperReport = JasperCompileManager.compileReport(reportSource);
+//            JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport,null,c);
+//            JasperExportManager.exportReportToHtmlFile(jasperPrint, reportDest);
+//            JasperViewer.viewReport(jasperPrint,false);
             
         }catch(Exception e){
             System.out.println(e);
